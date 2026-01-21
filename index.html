@@ -1,360 +1,137 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Türkiye Harita Projesi</title>
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-      background: #1a1a2e;
-    }
-    
-    /* Modern Header */
-    header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    h1 {
-      color: white;
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }
-    
-    #container {
-      display: flex;
-      height: 100vh;
-      padding-top: 80px;
-    }
-    
-    #map {
-      flex: 1;
-      height: calc(100vh - 80px);
-      transition: all 0.3s ease;
-    }
-    
-    #map.sidebar-open {
-      flex: 1;
-    }
-    
-    /* Sidebar - başta gizli */
-    #sidebar {
-      width: 0;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      box-shadow: -5px 0 25px rgba(0,0,0,0.4);
-      overflow: hidden;
-      padding: 0;
-      transition: all 0.3s ease;
-      color: white;
-    }
-    
-    #sidebar.active {
-      width: 380px;
-      padding: 30px;
-      overflow-y: auto;
-    }
-    
-    #sidebar h2 {
-      margin-top: 0;
-      color: white;
-      font-size: 26px;
-      border-bottom: 3px solid #667eea;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-    }
-    
-    .property {
-      margin: 20px 0;
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-    }
-    
-    .property label {
-      font-weight: 600;
-      color: #a8b2ff;
-      display: block;
-      margin-bottom: 8px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .property value {
-      color: white;
-      font-size: 18px;
-      font-weight: 500;
-    }
-    
-    .info {
-      padding: 10px 15px;
-      font: 14px/16px Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      border-radius: 10px;
-      border: none;
-    }
-    
-    .info h4 {
-      margin: 0 0 5px;
-      color: white;
-      font-weight: 600;
-    }
-    
-    /* Close button */
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .close-btn:hover {
-      background: rgba(255,255,255,0.3);
-      transform: rotate(90deg);
-    }
-    
-    /* Scrollbar styling */
-    #sidebar::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    #sidebar::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
-    }
-    
-    #sidebar::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.3);
-      border-radius: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Türkiye Harita Projesi</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Segoe UI;background:#1a1a2e;overflow:hidden}
+
+header{
+position:absolute;top:0;left:0;right:0;z-index:1000;
+background:linear-gradient(135deg,#667eea,#764ba2);
+padding:20px 40px;
+box-shadow:0 4px 20px rgba(0,0,0,.3)
+}
+h1{color:#fff;font-size:26px}
+
+#container{display:flex;height:100vh;padding-top:80px}
+#map{flex:1}
+
+#sidebar{
+width:0;overflow:hidden;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+color:white;
+transition:.3s;
+}
+#sidebar.active{width:380px;padding:30px;overflow-y:auto}
+
+.property{margin:15px 0;background:rgba(255,255,255,.1);padding:12px;border-radius:10px}
+.property label{font-size:12px;color:#a8b2ff}
+.property .value{font-size:18px}
+
+.close-btn{
+position:absolute;top:20px;right:20px;
+background:rgba(255,255,255,.2);
+border:none;color:white;
+width:32px;height:32px;border-radius:50%;
+cursor:pointer
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>🗺️ Türkiye İl Haritası</h1>
-  </header>
-  
-  <div id="container">
-    <div id="map"></div>
-    <div id="sidebar">
-      <button class="close-btn" onclick="closeSidebar()">✕</button>
-    </div>
-  </div>
-  
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // Haritayı başlat (Türkiye merkez)
-    var map = L.map('map').setView([39.0, 35.0], 6);
-    
-    // Harita katmanı (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap'
-    }).addTo(map);
 
-    // Bilgi kutusu
-    var info = L.control();
-    info.onAdd = function (map) {
-      this._div = L.DomUtil.create('div', 'info');
-      this.update();
-      return this._div;
-    };
-    info.update = function (props) {
-      this._div.innerHTML = '<h4>Türkiye İlleri</h4>' + 
-        (props ? '<b>' + props.name + '</b>' : 'Bir il üzerine gelin');
-    };
-    info.addTo(map);
+<header><h1>🗺️ Türkiye İl Haritası</h1></header>
 
-    // İl bilgilerini JSON'dan yükle
-    var cityData = {};
-    
-    // JSON dosyasını yükle
-    fetch('cities-data.json')
-  .then(response => response.json())
-  .then(data => {
-    cityData = data;
+<div id="container">
+  <div id="map"></div>
+  <div id="sidebar"></div>
+</div>
 
-    // GeoJSON yüklendiyse stili güncelle
-    if (geojson) {
-      geojson.setStyle(style);
-    }
-  });
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
 
-      .catch(error => {
-        console.error('İl verileri yüklenirken hata oluştu:', error);
-      });
+const map = L.map('map').setView([39,35],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
 
-    // Sidebar kapatma fonksiyonu
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('active');
-      document.getElementById('map').classList.remove('sidebar-open');
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
-    }
+let geojson;
+let cityData = {};
 
-    // Yan panel güncelleme fonksiyonu
-    function updateSidebar(cityName) {
-      var sidebar = document.getElementById('sidebar');
-      var data = cityData[cityName];
-      
-      if (data) {
-        sidebar.innerHTML = `
-          <button class="close-btn" onclick="closeSidebar()">✕</button>
-          <h2>${cityName}</h2>
-          <div class="property">
-            <label>Plaka Kodu</label>
-            <value>${data.plaka}</value>
-          </div>
-          <div class="property">
-            <label>Nüfus</label>
-            <value>${data.nufus}</value>
-          </div>
-          <div class="property">
-            <label>Bölge</label>
-            <value>${data.bolge}</value>
-          </div>
-          <div class="property">
-            <label>Yüzölçümü</label>
-            <value>${data.yuzolcumu}</value>
-          </div>
-        `;
-      } else {
-        sidebar.innerHTML = `
-          <button class="close-btn" onclick="closeSidebar()">✕</button>
-          <h2>${cityName}</h2>
-          <div class="property">
-            <label>Bilgi</label>
-            <value>Bu il için detaylı bilgi henüz eklenmedi.</value>
-          </div>
-        `;
-      }
-      
-      // Sidebar'ı aç
-      sidebar.classList.add('active');
-      document.getElementById('map').classList.add('sidebar-open');
-      
-      // Harita boyutunu güncelle
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
-    }
-
-    // Stil fonksiyonu
-    function style(feature) {
-  const cityName = feature.properties.name;
-  const city = cityData[cityName];
-
-  const population = city
-    ? parsePopulation(city.nufus)
-    : 0;
-
-  return {
-    fillColor: getColorByPopulation(population),
-    weight: 1.5,
-    opacity: 1,
-    color: 'white',
-    fillOpacity: 0.75
-  };
+// ---------------- HELPERS ----------------
+function parsePopulation(str){
+if(!str) return 0;
+return Number(str.replace(/\./g,''));
 }
 
-    // Hover efekti
-    function highlightFeature(e) {
-      var layer = e.target;
-      layer.setStyle({
-        weight: 5,
-        color: '#764ba2',
-        dashArray: '',
-        fillOpacity: 0.8
-      });
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-      }
-      info.update(layer.feature.properties);
-    }
-
-    // Mouse çıkınca normal haline dön
-    function resetHighlight(e) {
-      geojson.resetStyle(e.target);
-      info.update();
-    }
-
-    // Tıklama ile zoom ve bilgi göster
-    function zoomToFeature(e) {
-      map.fitBounds(e.target.getBounds());
-      var cityName = e.target.feature.properties.name;
-      updateSidebar(cityName);
-    }
-
-    // Her il için event listener
-    function onEachFeature(feature, layer) {
-      layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-      });
-    }
-
-    var geojson;
-
-    // Türkiye GeoJSON verisini yükle
-    fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json')
-      .then(response => response.json())
-      .then(data => {
-        geojson = L.geoJson(data, {
-          style: style,
-          onEachFeature: onEachFeature
-        }).addTo(map);
-      })
-      .catch(error => {
-        console.error('GeoJSON yüklenirken hata oluştu:', error);
-        alert('İl sınırları yüklenemedi. Lütfen internet bağlantınızı kontrol edin.');
-      });
-  </script>
-  function parsePopulation(popStr) {
-  if (!popStr) return 0;
-  return Number(popStr.replace(/\./g, ''));
-}
-function getColorByPopulation(population) {
-  return population > 5000000 ? '#4a1486' :
-         population > 3000000 ? '#6a1b9a' :
-         population > 2000000 ? '#7b1fa2' :
-         population > 1000000 ? '#8e24aa' :
-         population > 500000  ? '#ab47bc' :
-         population > 250000  ? '#ce93d8' :
-                                 '#ede7f6';
+function getColorByPopulation(p){
+return p>5000000?'#4a1486':
+       p>3000000?'#6a1b9a':
+       p>2000000?'#7b1fa2':
+       p>1000000?'#8e24aa':
+       p>500000?'#ab47bc':
+       p>250000?'#ce93d8':'#ede7f6';
 }
 
+// ---------------- STYLE ----------------
+function style(feature){
+const city = cityData[feature.properties.name];
+const pop = city ? parsePopulation(city.nufus) : 0;
+return {
+fillColor:getColorByPopulation(pop),
+weight:1.5,
+color:'white',
+fillOpacity:.75
+};
+}
+
+// ---------------- SIDEBAR ----------------
+function updateSidebar(name){
+const s=document.getElementById('sidebar');
+const d=cityData[name];
+s.innerHTML=`
+<button class="close-btn" onclick="closeSidebar()">✕</button>
+<h2>${name}</h2>
+${d?`
+<div class="property"><label>Plaka</label><div class="value">${d.plaka}</div></div>
+<div class="property"><label>Nüfus</label><div class="value">${d.nufus}</div></div>
+<div class="property"><label>Bölge</label><div class="value">${d.bolge}</div></div>
+<div class="property"><label>Yüzölçümü</label><div class="value">${d.yuzolcumu}</div></div>
+`:`<div class="property"><div class="value">Bilgi yok</div></div>`}
+`;
+s.classList.add('active');
+setTimeout(()=>map.invalidateSize(),300);
+}
+
+function closeSidebar(){
+document.getElementById('sidebar').classList.remove('active');
+setTimeout(()=>map.invalidateSize(),300);
+}
+
+// ---------------- EVENTS ----------------
+function onEachFeature(feature,layer){
+layer.on({
+click:e=>{
+map.fitBounds(e.target.getBounds());
+updateSidebar(feature.properties.name);
+}
+});
+}
+
+// ---------------- LOAD DATA ----------------
+Promise.all([
+fetch('cities-data.json').then(r=>r.json()),
+fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json').then(r=>r.json())
+]).then(([cities,geo])=>{
+cityData=cities;
+geojson=L.geoJson(geo,{style,onEachFeature}).addTo(map);
+});
+
+</script>
 </body>
 </html>
