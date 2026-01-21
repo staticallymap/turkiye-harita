@@ -266,16 +266,21 @@
     }
 
     // Stil fonksiyonu
-    function style(feature) {
-      return {
-        fillColor: '#667eea',
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.4
-      };
+    function getColor(cityName) {
+    const data = cityData[cityName];
+    if (!data) return '#667eea'; // Varsayılan renk
+    
+    switch(data.bolge) {
+        case 'Marmara': return '#e74c3c';
+        case 'Ege': return '#2ecc71';
+        case 'İç Anadolu': return '#f1c40f';
+        case 'Akdeniz': return '#3498db';
+        case 'Karadeniz': return '#16a085';
+        case 'Doğu Anadolu': return '#e67e22';
+        case 'Güneydoğu Anadolu': return '#9b59b6';
+        default: return '#667eea';
     }
+}
 
     // Hover efekti
     function highlightFeature(e) {
