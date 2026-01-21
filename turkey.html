@@ -2,8 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Türkiye Harita Projesi</title>
-  <!-- Leaflet CSS -->
+  <title>Türkiye Haritası</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -17,27 +16,8 @@
     }
     header h1 { font-size:28px; }
 
-    #home-buttons {
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      margin:50px 0;
-      gap:20px;
-    }
-    .btn {
-      padding:15px 30px;
-      border:none;
-      border-radius:10px;
-      background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-      transition:0.3s;
-    }
-    .btn:hover { transform:scale(1.1); }
-
-    #container { display:flex; height:80vh; }
-    #map { flex:1; transition:0.3s; }
+    #container { display:flex; height:100vh; }
+    #map { flex:1; }
     #sidebar {
       width:0;
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -69,15 +49,7 @@
   <h1>🗺️ Türkiye Haritası ve Verileri</h1>
 </header>
 
-<div id="home-buttons">
-  <button class="btn" onclick="showMap()">Türkiye Haritası</button>
-  <button class="btn" onclick="alert('Seçenek 2')">Seçenek 2</button>
-  <button class="btn" onclick="alert('Seçenek 3')">Seçenek 3</button>
-  <button class="btn" onclick="alert('Seçenek 4')">Seçenek 4</button>
-  <button class="btn" onclick="alert('Seçenek 5')">Seçenek 5</button>
-</div>
-
-<div id="container" style="display:none;">
+<div id="container">
   <div id="map"></div>
   <div id="sidebar">
     <button class="close-btn" onclick="closeSidebar()">✕</button>
@@ -86,15 +58,8 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-function showMap(){
-  document.getElementById('home-buttons').style.display='none';
-  document.getElementById('container').style.display='flex';
-  initMap();
-}
-
-// Tüm 81 ilin sayısal verileri
-var cityData = {
-  "Adana": {"plaka":1,"nufus":2237942,"yillikArtis":0.8,"bolge":"Akdeniz","yuzolcumu":14003},
+// Türkiye illeri verileri
+var cityData = { "Adana": {"plaka":1,"nufus":2237942,"yillikArtis":0.8,"bolge":"Akdeniz","yuzolcumu":14003},
   "Adıyaman":{"plaka":2,"nufus":632927,"yillikArtis":1.0,"bolge":"Güneydoğu Anadolu","yuzolcumu":7573},
   "Afyonkarahisar":{"plaka":3,"nufus":729237,"yillikArtis":0.5,"bolge":"İç Anadolu","yuzolcumu":14013},
   "Ağrı":{"plaka":4,"nufus":536427,"yillikArtis":0.3,"bolge":"Doğu Anadolu","yuzolcumu":11099},
@@ -175,11 +140,11 @@ var cityData = {
   "Kilis":{"plaka":79,"nufus":145074,"yillikArtis":0.2,"bolge":"Güneydoğu Anadolu","yuzolcumu":1411},
   "Osmaniye":{"plaka":80,"nufus":536378,"yillikArtis":0.4,"bolge":"Akdeniz","yuzolcumu":3383},
   "Düzce":{"plaka":81,"nufus":393730,"yillikArtis":0.3,"bolge":"Marmara","yuzolcumu":2446}
-};
+/ };
 
+// Harita değişkenleri
 var map, geojson;
 function initMap(){
-  if(map) return;
   map = L.map('map').setView([39.0, 35.0], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
 
@@ -206,6 +171,7 @@ function initMap(){
     .then(res=>res.json()).then(data=>geojson.addData(data)).catch(err=>{console.error(err); alert('İl sınırları yüklenemedi!');});
 }
 
+// Sidebar ve detaylar
 function closeSidebar(){document.getElementById('sidebar').classList.remove('active'); setTimeout(()=>{map.invalidateSize();},300);}
 function updateSidebar(cityName){
   var sidebar=document.getElementById('sidebar');
@@ -223,6 +189,10 @@ function updateSidebar(cityName){
   }
   sidebar.classList.add('active'); setTimeout(()=>{map.invalidateSize();},300);
 }
+
+// Sayfa yüklendiğinde haritayı başlat
+window.onload = initMap;
 </script>
+
 </body>
 </html>
