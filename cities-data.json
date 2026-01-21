@@ -1,488 +1,83 @@
 {
-  "Adana": {
-    "plaka": "01",
-    "nufus": "2.274.106",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "13.844 km²"
-  },
-  "Adıyaman": {
-    "plaka": "02",
-    "nufus": "632.148",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "7.337 km²"
-  },
-  "Afyonkarahisar": {
-    "plaka": "03",
-    "nufus": "747.555",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "14.016 km²"
-  },
-  "Ağrı": {
-    "plaka": "04",
-    "nufus": "535.435",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "11.315 km²"
-  },
-  "Amasya": {
-    "plaka": "05",
-    "nufus": "338.267",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "5.628 km²"
-  },
-  "Ankara": {
-    "plaka": "06",
-    "nufus": "5.782.285",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "25.632 km²"
-  },
-  "Antalya": {
-    "plaka": "07",
-    "nufus": "2.688.004",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "20.177 km²"
-  },
-  "Artvin": {
-    "plaka": "08",
-    "nufus": "169.509",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "7.393 km²"
-  },
-  "Aydın": {
-    "plaka": "09",
-    "nufus": "1.148.241",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "8.116 km²"
-  },
-  "Balıkesir": {
-    "plaka": "10",
-    "nufus": "1.257.590",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "14.583 km²"
-  },
-  "Bilecik": {
-    "plaka": "11",
-    "nufus": "228.673",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "4.181 km²"
-  },
-  "Bingöl": {
-    "plaka": "12",
-    "nufus": "282.556",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "8.004 km²"
-  },
-  "Bitlis": {
-    "plaka": "13",
-    "nufus": "353.988",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "6.707 km²"
-  },
-  "Bolu": {
-    "plaka": "14",
-    "nufus": "320.824",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "8.313 km²"
-  },
-  "Burdur": {
-    "plaka": "15",
-    "nufus": "273.799",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "7.175 km²"
-  },
-  "Bursa": {
-    "plaka": "16",
-    "nufus": "3.194.720",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "10.813 km²"
-  },
-  "Çanakkale": {
-    "plaka": "17",
-    "nufus": "557.863",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "9.817 km²"
-  },
-  "Çankırı": {
-    "plaka": "18",
-    "nufus": "195.766",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "7.542 km²"
-  },
-  "Çorum": {
-    "plaka": "19",
-    "nufus": "536.483",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "12.428 km²"
-  },
-  "Denizli": {
-    "plaka": "20",
-    "nufus": "1.059.501",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "12.134 km²"
-  },
-  "Diyarbakır": {
-    "plaka": "21",
-    "nufus": "1.804.880",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "15.162 km²"
-  },
-  "Edirne": {
-    "plaka": "22",
-    "nufus": "413.903",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "6.145 km²"
-  },
-  "Elazığ": {
-    "plaka": "23",
-    "nufus": "607.590",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "9.181 km²"
-  },
-  "Erzincan": {
-    "plaka": "24",
-    "nufus": "236.034",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "11.815 km²"
-  },
-  "Erzurum": {
-    "plaka": "25",
-    "nufus": "759.157",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "25.066 km²"
-  },
-  "Eskişehir": {
-    "plaka": "26",
-    "nufus": "906.101",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "13.960 km²"
-  },
-  "Gaziantep": {
-    "plaka": "27",
-    "nufus": "2.154.051",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "6.803 km²"
-  },
-  "Giresun": {
-    "plaka": "28",
-    "nufus": "453.912",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "7.025 km²"
-  },
-  "Gümüşhane": {
-    "plaka": "29",
-    "nufus": "164.521",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "6.668 km²"
-  },
-  "Hakkari": {
-    "plaka": "30",
-    "nufus": "287.625",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "7.095 km²"
-  },
-  "Hatay": {
-    "plaka": "31",
-    "nufus": "1.670.712",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "5.524 km²"
-  },
-  "Isparta": {
-    "plaka": "32",
-    "nufus": "444.914",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "8.946 km²"
-  },
-  "Mersin": {
-    "plaka": "33",
-    "nufus": "1.938.389",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "16.010 km²"
-  },
-  "İstanbul": {
-    "plaka": "34",
-    "nufus": "15.907.951",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "5.461 km²"
-  },
-  "İzmir": {
-    "plaka": "35",
-    "nufus": "4.462.056",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "11.891 km²"
-  },
-  "Kars": {
-    "plaka": "36",
-    "nufus": "285.410",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "9.587 km²"
-  },
-  "Kastamonu": {
-    "plaka": "37",
-    "nufus": "383.373",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "13.064 km²"
-  },
-  "Kayseri": {
-    "plaka": "38",
-    "nufus": "1.441.523",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "16.970 km²"
-  },
-  "Kırklareli": {
-    "plaka": "39",
-    "nufus": "361.836",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "6.459 km²"
-  },
-  "Kırşehir": {
-    "plaka": "40",
-    "nufus": "242.938",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "6.584 km²"
-  },
-  "Kocaeli": {
-    "plaka": "41",
-    "nufus": "2.102.907",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "3.505 km²"
-  },
-  "Konya": {
-    "plaka": "42",
-    "nufus": "2.277.017",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "40.838 km²"
-  },
-  "Kütahya": {
-    "plaka": "43",
-    "nufus": "580.701",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "11.634 km²"
-  },
-  "Malatya": {
-    "plaka": "44",
-    "nufus": "812.580",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "12.259 km²"
-  },
-  "Manisa": {
-    "plaka": "45",
-    "nufus": "1.468.279",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "13.339 km²"
-  },
-  "Kahramanmaraş": {
-    "plaka": "46",
-    "nufus": "1.177.436",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "14.520 km²"
-  },
-  "Mardin": {
-    "plaka": "47",
-    "nufus": "870.374",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "8.780 km²"
-  },
-  "Muğla": {
-    "plaka": "48",
-    "nufus": "1.024.263",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "12.654 km²"
-  },
-  "Muş": {
-    "plaka": "49",
-    "nufus": "411.605",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "8.718 km²"
-  },
-  "Nevşehir": {
-    "plaka": "50",
-    "nufus": "309.914",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "5.485 km²"
-  },
-  "Niğde": {
-    "plaka": "51",
-    "nufus": "364.707",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "7.312 km²"
-  },
-  "Ordu": {
-    "plaka": "52",
-    "nufus": "771.932",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "5.952 km²"
-  },
-  "Rize": {
-    "plaka": "53",
-    "nufus": "348.608",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "3.835 km²"
-  },
-  "Sakarya": {
-    "plaka": "54",
-    "nufus": "1.080.080",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "4.824 km²"
-  },
-  "Samsun": {
-    "plaka": "55",
-    "nufus": "1.371.927",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "9.725 km²"
-  },
-  "Siirt": {
-    "plaka": "56",
-    "nufus": "331.670",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "5.717 km²"
-  },
-  "Sinop": {
-    "plaka": "57",
-    "nufus": "216.460",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "5.862 km²"
-  },
-  "Sivas": {
-    "plaka": "58",
-    "nufus": "646.608",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "28.164 km²"
-  },
-  "Tekirdağ": {
-    "plaka": "59",
-    "nufus": "1.122.129",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "6.190 km²"
-  },
-  "Tokat": {
-    "plaka": "60",
-    "nufus": "612.646",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "10.042 km²"
-  },
-  "Trabzon": {
-    "plaka": "61",
-    "nufus": "818.023",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "4.628 km²"
-  },
-  "Tunceli": {
-    "plaka": "62",
-    "nufus": "86.076",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "7.582 km²"
-  },
-  "Şanlıurfa": {
-    "plaka": "63",
-    "nufus": "2.170.110",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "18.765 km²"
-  },
-  "Uşak": {
-    "plaka": "64",
-    "nufus": "375.454",
-    "bolge": "Ege Bölgesi",
-    "yuzolcumu": "5.555 km²"
-  },
-  "Van": {
-    "plaka": "65",
-    "nufus": "1.149.342",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "19.069 km²"
-  },
-  "Yozgat": {
-    "plaka": "66",
-    "nufus": "424.981",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "13.690 km²"
-  },
-  "Zonguldak": {
-    "plaka": "67",
-    "nufus": "588.510",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "3.342 km²"
-  },
-  "Aksaray": {
-    "plaka": "68",
-    "nufus": "433.055",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "7.659 km²"
-  },
-  "Bayburt": {
-    "plaka": "69",
-    "nufus": "84.843",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "3.746 km²"
-  },
-  "Karaman": {
-    "plaka": "70",
-    "nufus": "262.375",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "8.678 km²"
-  },
-  "Kırıkkale": {
-    "plaka": "71",
-    "nufus": "282.412",
-    "bolge": "İç Anadolu Bölgesi",
-    "yuzolcumu": "4.791 km²"
-  },
-  "Batman": {
-    "plaka": "72",
-    "nufus": "620.278",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "4.477 km²"
-  },
-  "Şırnak": {
-    "plaka": "73",
-    "nufus": "540.095",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "7.078 km²"
-  },
-  "Bartın": {
-    "plaka": "74",
-    "nufus": "198.999",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "2.330 km²"
-  },
-  "Ardahan": {
-    "plaka": "75",
-    "nufus": "96.226",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "4.934 km²"
-  },
-  "Iğdır": {
-    "plaka": "76",
-    "nufus": "201.314",
-    "bolge": "Doğu Anadolu Bölgesi",
-    "yuzolcumu": "3.664 km²"
-  },
-  "Yalova": {
-    "plaka": "77",
-    "nufus": "296.190",
-    "bolge": "Marmara Bölgesi",
-    "yuzolcumu": "839 km²"
-  },
-  "Karabük": {
-    "plaka": "78",
-    "nufus": "248.014",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "4.142 km²"
-  },
-  "Kilis": {
-    "plaka": "79",
-    "nufus": "145.826",
-    "bolge": "Güneydoğu Anadolu Bölgesi",
-    "yuzolcumu": "1.412 km²"
-  },
-  "Osmaniye": {
-    "plaka": "80",
-    "nufus": "558.787",
-    "bolge": "Akdeniz Bölgesi",
-    "yuzolcumu": "3.320 km²"
-  },
-  "Düzce": {
-    "plaka": "81",
-    "nufus": "405.131",
-    "bolge": "Karadeniz Bölgesi",
-    "yuzolcumu": "2.492 km²"
-  }
+  "Adana": {"plaka":"01","nufus":"2,280,484","bolge":"Akdeniz Bölgesi","yuzolcumu":"13.844 km²"},
+  "Adıyaman": {"plaka":"02","nufus":"611,037","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"7.337 km²"},
+  "Afyonkarahisar": {"plaka":"03","nufus":"750,193","bolge":"Ege Bölgesi","yuzolcumu":"14.016 km²"},
+  "Ağrı": {"plaka":"04","nufus":"499,801","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"11.315 km²"},
+  "Amasya": {"plaka":"05","nufus":"342,378","bolge":"Karadeniz Bölgesi","yuzolcumu":"5.628 km²"},
+  "Ankara": {"plaka":"06","nufus":"5,864,049","bolge":"İç Anadolu Bölgesi","yuzolcumu":"25.632 km²"},
+  "Antalya": {"plaka":"07","nufus":"2,722,103","bolge":"Akdeniz Bölgesi","yuzolcumu":"20.177 km²"},
+  "Artvin": {"plaka":"08","nufus":"169,509","bolge":"Karadeniz Bölgesi","yuzolcumu":"7.393 km²"},
+  "Aydın": {"plaka":"09","nufus":"1,000,773","bolge":"Ege Bölgesi","yuzolcumu":"8.116 km²"},
+  "Balıkesir": {"plaka":"10","nufus":"1,276,096","bolge":"Marmara Bölgesi","yuzolcumu":"14.583 km²"},
+  "Bilecik": {"plaka":"11","nufus":"218,717","bolge":"Marmara Bölgesi","yuzolcumu":"4.181 km²"},
+  "Bingöl": {"plaka":"12","nufus":"281,768","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"8.004 km²"},
+  "Bitlis": {"plaka":"13","nufus":"350,994","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"6.707 km²"},
+  "Bolu": {"plaka":"14","nufus":"314,802","bolge":"Karadeniz Bölgesi","yuzolcumu":"8.313 km²"},
+  "Burdur": {"plaka":"15","nufus":"267,092","bolge":"Akdeniz Bölgesi","yuzolcumu":"7.175 km²"},
+  "Bursa": {"plaka":"16","nufus":"3,238,618","bolge":"Marmara Bölgesi","yuzolcumu":"10.813 km²"},
+  "Çanakkale": {"plaka":"17","nufus":"541,548","bolge":"Marmara Bölgesi","yuzolcumu":"9.817 km²"},
+  "Çankırı": {"plaka":"18","nufus":"192,428","bolge":"İç Anadolu Bölgesi","yuzolcumu":"7.542 km²"},
+  "Çorum": {"plaka":"19","nufus":"530,126","bolge":"Karadeniz Bölgesi","yuzolcumu":"12.428 km²"},
+  "Denizli": {"plaka":"20","nufus":"691,783","bolge":"Ege Bölgesi","yuzolcumu":"12.134 km²"},
+  "Diyarbakır": {"plaka":"21","nufus":"1,833,684","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"15.162 km²"},
+  "Edirne": {"plaka":"22","nufus":"407,763","bolge":"Marmara Bölgesi","yuzolcumu":"6.145 km²"},
+  "Elazığ": {"plaka":"23","nufus":"400,818","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"9.181 km²"},
+  "Erzincan": {"plaka":"24","nufus":"234,431","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"11.815 km²"},
+  "Erzurum": {"plaka":"25","nufus":"758,279","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"25.066 km²"},
+  "Eskişehir": {"plaka":"26","nufus":"888,828","bolge":"İç Anadolu Bölgesi","yuzolcumu":"13.960 km²"},
+  "Gaziantep": {"plaka":"27","nufus":"2,193,363","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"6.803 km²"},
+  "Giresun": {"plaka":"28","nufus":"448,721","bolge":"Karadeniz Bölgesi","yuzolcumu":"7.025 km²"},
+  "Gümüşhane": {"plaka":"29","nufus":"141,702","bolge":"Karadeniz Bölgesi","yuzolcumu":"6.668 km²"},
+  "Hakkari": {"plaka":"30","nufus":"280,514","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"7.095 km²"},
+  "Hatay": {"plaka":"31","nufus":"1,562,185","bolge":"Akdeniz Bölgesi","yuzolcumu":"5.524 km²"},
+  "Isparta": {"plaka":"32","nufus":"440,304","bolge":"Akdeniz Bölgesi","yuzolcumu":"8.946 km²"},
+  "Mersin": {"plaka":"33","nufus":"1,954,279","bolge":"Akdeniz Bölgesi","yuzolcumu":"16.010 km²"},
+  "İstanbul": {"plaka":"34","nufus":"15,701,602","bolge":"Marmara Bölgesi","yuzolcumu":"5.461 km²"},
+  "İzmir": {"plaka":"35","nufus":"4,493,242","bolge":"Ege Bölgesi","yuzolcumu":"11.891 km²"},
+  "Kars": {"plaka":"36","nufus":"284,923","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"9.587 km²"},
+  "Kastamonu": {"plaka":"37","nufus":"376,377","bolge":"Karadeniz Bölgesi","yuzolcumu":"13.064 km²"},
+  "Kayseri": {"plaka":"38","nufus":"1,452,458","bolge":"İç Anadolu Bölgesi","yuzolcumu":"16.970 km²"},
+  "Kırklareli": {"plaka":"39","nufus":"361,737","bolge":"Marmara Bölgesi","yuzolcumu":"6.459 km²"},
+  "Kırşehir": {"plaka":"40","nufus":"243,042","bolge":"İç Anadolu Bölgesi","yuzolcumu":"6.584 km²"},
+  "Kocaeli": {"plaka":"41","nufus":"2,130,006","bolge":"Marmara Bölgesi","yuzolcumu":"3.505 km²"},
+  "Konya": {"plaka":"42","nufus":"2,330,024","bolge":"İç Anadolu Bölgesi","yuzolcumu":"40.838 km²"},
+  "Kütahya": {"plaka":"43","nufus":"256,952","bolge":"Ege Bölgesi","yuzolcumu":"11.634 km²"},
+  "Malatya": {"plaka":"44","nufus":"806,101","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"12.259 km²"},
+  "Manisa": {"plaka":"45","nufus":"1,475,353","bolge":"Ege Bölgesi","yuzolcumu":"13.339 km²"},
+  "Kahramanmaraş": {"plaka":"46","nufus":"653,915","bolge":"Akdeniz Bölgesi","yuzolcumu":"14.520 km²"},
+  "Mardin": {"plaka":"47","nufus":"854,716","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"8.780 km²"},
+  "Muğla": {"plaka":"48","nufus":"1,000,773","bolge":"Ege Bölgesi","yuzolcumu":"12.654 km²"},
+  "Muş": {"plaka":"49","nufus":"411,117","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"8.718 km²"},
+  "Nevşehir": {"plaka":"50","nufus":"304,962","bolge":"İç Anadolu Bölgesi","yuzolcumu":"5.485 km²"},
+  "Niğde": {"plaka":"51","nufus":"362,071","bolge":"İç Anadolu Bölgesi","yuzolcumu":"7.312 km²"},
+  "Ordu": {"plaka":"52","nufus":"761,400","bolge":"Karadeniz Bölgesi","yuzolcumu":"5.952 km²"},
+  "Rize": {"plaka":"53","nufus":"344,359","bolge":"Karadeniz Bölgesi","yuzolcumu":"3.835 km²"},
+  "Sakarya": {"plaka":"54","nufus":"593,841","bolge":"Marmara Bölgesi","yuzolcumu":"4.824 km²"},
+  "Samsun": {"plaka":"55","nufus":"1,382,376","bolge":"Karadeniz Bölgesi","yuzolcumu":"9.725 km²"},
+  "Siirt": {"plaka":"56","nufus":"331,070","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"5.717 km²"},
+  "Sinop": {"plaka":"57","nufus":"216,460","bolge":"Karadeniz Bölgesi","yuzolcumu":"5.862 km²"},
+  "Sivas": {"plaka":"58","nufus":"635,889","bolge":"İç Anadolu Bölgesi","yuzolcumu":"28.164 km²"},
+  "Tekirdağ": {"plaka":"59","nufus":"1,187,162","bolge":"Marmara Bölgesi","yuzolcumu":"6.190 km²"},
+  "Tokat": {"plaka":"60","nufus":"597,861","bolge":"Karadeniz Bölgesi","yuzolcumu":"10.042 km²"},
+  "Trabzon": {"plaka":"61","nufus":"811,901","bolge":"Karadeniz Bölgesi","yuzolcumu":"4.628 km²"},
+  "Tunceli": {"plaka":"62","nufus":"86,612","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"7.582 km²"},
+  "Şanlıurfa": {"plaka":"63","nufus":"2,237,745","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"18.765 km²"},
+  "Uşak": {"plaka":"64","nufus":"369,433","bolge":"Ege Bölgesi","yuzolcumu":"5.555 km²"},
+  "Van": {"plaka":"65","nufus":"1,149,342","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"19.069 km²"},
+  "Yozgat": {"plaka":"66","nufus":"419,095","bolge":"İç Anadolu Bölgesi","yuzolcumu":"13.690 km²"},
+  "Zonguldak": {"plaka":"67","nufus":"591,204","bolge":"Karadeniz Bölgesi","yuzolcumu":"3.342 km²"},
+  "Aksaray": {"plaka":"68","nufus":"423,011","bolge":"İç Anadolu Bölgesi","yuzolcumu":"7.659 km²"},
+  "Bayburt": {"plaka":"69","nufus":"83,676","bolge":"Karadeniz Bölgesi","yuzolcumu":"3.746 km²"},
+  "Karaman": {"plaka":"70","nufus":"254,919","bolge":"İç Anadolu Bölgesi","yuzolcumu":"8.678 km²"},
+  "Kırıkkale": {"plaka":"71","nufus":"278,703","bolge":"İç Anadolu Bölgesi","yuzolcumu":"4.791 km²"},
+  "Batman": {"plaka":"72","nufus":"620,278","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"4.477 km²"},
+  "Şırnak": {"plaka":"73","nufus":"537,762","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"7.078 km²"},
+  "Bartın": {"plaka":"74","nufus":"198,979","bolge":"Karadeniz Bölgesi","yuzolcumu":"2.330 km²"},
+  "Ardahan": {"plaka":"75","nufus":"96,161","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"4.934 km²"},
+  "Iğdır": {"plaka":"76","nufus":"201,314","bolge":"Doğu Anadolu Bölgesi","yuzolcumu":"3.664 km²"},
+  "Yalova": {"plaka":"77","nufus":"307,882","bolge":"Marmara Bölgesi","yuzolcumu":"839 km²"},
+  "Karabük": {"plaka":"78","nufus":"243,614","bolge":"Karadeniz Bölgesi","yuzolcumu":"4.142 km²"},
+  "Kilis": {"plaka":"79","nufus":"156,739","bolge":"Güneydoğu Anadolu Bölgesi","yuzolcumu":"1.412 km²"},
+  "Osmaniye": {"plaka":"80","nufus":"548,556","bolge":"Akdeniz Bölgesi","yuzolcumu":"3.320 km²"},
+  "Düzce": {"plaka":"81","nufus":"395,679","bolge":"Karadeniz Bölgesi","yuzolcumu":"2.492 km²"}
 }
