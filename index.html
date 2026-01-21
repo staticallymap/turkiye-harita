@@ -2,66 +2,87 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Türkiye İstatistik Haritası</title>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>GeoStats | Veriyle Dünyayı Keşfet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Segoe UI;background:#1a1a2e;color:#fff;overflow:hidden}
+body{
+font-family:Segoe UI,system-ui;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+min-height:100vh;
+}
 
 header{
-position:absolute;top:0;left:0;right:0;z-index:1000;
-background:linear-gradient(135deg,#667eea,#764ba2);
-padding:15px 30px
+padding:40px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-#search{
-margin-top:10px;
-padding:8px;
-width:240px;
-border:none;border-radius:6px
+.logo{
+font-size:26px;
+font-weight:700;
+letter-spacing:1px;
 }
 
-#container{display:flex;height:100vh;padding-top:90px}
-#map{flex:1}
-
-#sidebar{
-width:0;overflow:hidden;
-background:linear-gradient(135deg,#1e3c72,#2a5298);
-transition:.3s;
-padding:0
-}
-#sidebar.active{width:380px;padding:20px;overflow-y:auto}
-
-.property{margin:12px 0;background:rgba(255,255,255,.1);padding:12px;border-radius:10px}
-label{font-size:12px;color:#a8b2ff}
-.value{font-size:18px}
-
-.close-btn{
-position:absolute;top:15px;right:15px;
-background:rgba(255,255,255,.2);
-border:none;color:white;
-width:32px;height:32px;border-radius:50%;
-cursor:pointer
-}
-
-#legend{
-position:absolute;bottom:20px;left:20px;
-background:rgba(0,0,0,.6);
-padding:10px;border-radius:8px;font-size:12px
-}
-.legend-item{display:flex;align-items:center;margin:4px 0}
-.color-box{width:14px;height:14px;margin-right:6px}
-
-#ad{
-margin-top:15px;
-background:rgba(255,255,255,.15);
-padding:10px;
+.hero{
+max-width:1100px;
+margin:60px auto;
+padding:0 30px;
 text-align:center;
-border-radius:8px;
-font-size:13px
+}
+
+.hero h1{
+font-size:52px;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+color:#cbd5e1;
+margin-bottom:50px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:30px;
+transition:.3s;
+cursor:pointer;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.card:hover{
+transform:translateY(-8px);
+background:rgba(255,255,255,.12);
+}
+
+.card h2{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.card p{
+color:#cbd5e1;
+font-size:15px;
+line-height:1.5;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#94a3b8;
+font-size:14px;
 }
 </style>
 </head>
@@ -69,115 +90,43 @@ font-size:13px
 <body>
 
 <header>
-<h2>🗺️ Türkiye İstatistik Haritası</h2>
-<input id="search" placeholder="İl ara (İstanbul)">
+<div class="logo">📊 GeoStats</div>
 </header>
 
-<div id="container">
-<div id="map"></div>
-<div id="sidebar"></div>
+<section class="hero">
+<h1>Veriyle<br>Dünyayı Keşfet</h1>
+<p>
+Ülkeler, şehirler ve nüfus verileri tek bir harita üzerinde.  
+Etkileşimli, görsel ve sade.
+</p>
+
+<div class="cards">
+  <div class="card" onclick="location.href='turkey.html'">
+    <h2>🇹🇷 Türkiye</h2>
+    <p>
+    İl bazlı nüfus, bölge, yüzölçümü ve etkileşimli harita.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🌍 Dünya</h2>
+    <p>
+    Yakında: ülkelerin nüfus ve demografik yapıları.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🇪🇺 Avrupa</h2>
+    <p>
+    Yakında: ülke ülke etnik ve nüfus verileri.
+    </p>
+  </div>
 </div>
+</section>
 
-<div id="legend"></div>
+<footer>
+© 2026 GeoStats • Veriye dayalı görselleştirme
+</footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-
-const map = L.map('map').setView([39,35],6);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-attribution:'© OpenStreetMap'
-}).addTo(map);
-
-let geojson;
-let cityData={};
-
-function parsePopulation(str){
-if(!str) return 0;
-return Number(str.replace(/\./g,''));
-}
-
-function getColor(p){
-return p>5000000?'#4a1486':
-p>3000000?'#6a1b9a':
-p>2000000?'#7b1fa2':
-p>1000000?'#8e24aa':
-p>500000?'#ab47bc':
-p>250000?'#ce93d8':'#ede7f6';
-}
-
-function style(f){
-const c=cityData[f.properties.name];
-const p=c?parsePopulation(c.nufus):0;
-return{fillColor:getColor(p),weight:1,color:'#fff',fillOpacity:.75};
-}
-
-function updateSidebar(name){
-const s=document.getElementById('sidebar');
-const d=cityData[name];
-s.innerHTML=`
-<button class="close-btn" onclick="closeSidebar()">✕</button>
-<h2>${name}</h2>
-
-${d?`
-<div class="property"><label>Nüfus</label><div class="value">${d.nufus}</div></div>
-<div class="property"><label>Bölge</label><div class="value">${d.bolge}</div></div>
-<canvas id="chart"></canvas>
-<div id="ad">📢 Reklam Alanı (AdSense)</div>
-`:`<div class="property">Veri yok</div>`}
-`;
-
-s.classList.add('active');
-setTimeout(()=>map.invalidateSize(),300);
-
-if(d){
-new Chart(document.getElementById('chart'),{
-type:'bar',
-data:{
-labels:['Nüfus'],
-datasets:[{data:[parsePopulation(d.nufus)],backgroundColor:'#a78bfa'}]
-},
-options:{plugins:{legend:{display:false}}}
-});
-}
-}
-
-function closeSidebar(){
-document.getElementById('sidebar').classList.remove('active');
-setTimeout(()=>map.invalidateSize(),300);
-}
-
-function onEachFeature(f,l){
-l.on({
-click:e=>{
-map.fitBounds(e.target.getBounds());
-updateSidebar(f.properties.name);
-}
-});
-}
-
-Promise.all([
-fetch('cities-data.json').then(r=>r.json()).catch(()=>({})),
-fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json').then(r=>r.json())
-]).then(([cities,geo])=>{
-cityData=cities;
-geojson=L.geoJson(geo,{style,onEachFeature}).addTo(map);
-});
-
-document.getElementById('search').addEventListener('keyup',e=>{
-const v=e.target.value.toLowerCase();
-geojson.eachLayer(l=>{
-const n=l.feature.properties.name.toLowerCase();
-l.setStyle({fillOpacity:n.includes(v)?0.9:0.2});
-});
-});
-
-document.getElementById('legend').innerHTML=`
-<div class="legend-item"><div class="color-box" style="background:#4a1486"></div>5M+</div>
-<div class="legend-item"><div class="color-box" style="background:#6a1b9a"></div>3–5M</div>
-<div class="legend-item"><div class="color-box" style="background:#7b1fa2"></div>2–3M</div>
-<div class="legend-item"><div class="color-box" style="background:#8e24aa"></div>1–2M</div>
-<div class="legend-item"><div class="color-box" style="background:#ab47bc"></div>500K–1M</div>
-`;
-</script>
 </body>
 </html>
