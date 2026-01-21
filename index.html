@@ -3,47 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <title>Türkiye Harita Projesi</title>
-
   <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
-
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
     }
-
     h1 {
       text-align: center;
       margin: 10px 0;
     }
-
     #map {
       height: 90vh;
       width: 100%;
     }
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
+    .info h4 {
+      margin: 0 0 5px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
-
-  <h1>Türkiye Harita Projesi</h1>
+  <h1>Türkiye İl Haritası</h1>
   <div id="map"></div>
-
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <script>
     // Haritayı başlat (Türkiye merkez)
     var map = L.map('map').setView([39.0, 35.0], 6);
-
+    
     // Harita katmanı (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap'
     }).addTo(map);
-  </script>
 
+    // Bilgi kutusu
+    var info = L.control();
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
+    info.update = function (props) {
+      this._div.innerHTML = '<h4>Türkiye İlleri</h4>' + 
+        (props ? '<b>' + props.name + '</b>' : 'Bir il üzerine gelin');
+    };
+    info.addTo(map);
+
+    // Stil fonksiyonu
+    function style(feature) {
+      return {
+        fillColor: '#3388ff',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.3
+      };
+    }
+
+    // Hover efekti
+    function highlightFeature(e) {
+      var layer = e.target;
+      layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+      });
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
+      info.update(layer.feature.properties);
+    }
+
+    // Mouse çıkınca normal haline dön
+    function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+      info.update();
+    }
+
+    // Tıklama ile zoom
+    function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+    }
+
+    // Her il için event listener
+    function onEachFeature(feature, layer) {
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+      });
+    }
+
+    var geojson;
+
+    // Türkiye GeoJSON verisini yükle
+    fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json')
+      .then(response => response.json())
+      .then(data => {
+        geojson = L.geoJson(data, {
+          style: style,
+          onEachFeature: onEachFeature
+        }).addTo(map);
+      })
+      .catch(error => {
+        console.error('GeoJSON yüklenirken hata oluştu:', error);
+        alert('İl sınırları yüklenemedi. Lütfen internet bağlantınızı kontrol edin.');
+      });
+  </script>
 </body>
 </html>
