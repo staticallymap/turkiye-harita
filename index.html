@@ -201,10 +201,16 @@
     
     // JSON dosyasını yükle
     fetch('cities-data.json')
-      .then(response => response.json())
-      .then(data => {
-        cityData = data;
-      })
+  .then(response => response.json())
+  .then(data => {
+    cityData = data;
+
+    // GeoJSON yüklendiyse stili güncelle
+    if (geojson) {
+      geojson.setStyle(style);
+    }
+  });
+
       .catch(error => {
         console.error('İl verileri yüklenirken hata oluştu:', error);
       });
@@ -267,15 +273,21 @@
 
     // Stil fonksiyonu
     function style(feature) {
-      return {
-        fillColor: '#667eea',
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.4
-      };
-    }
+  const cityName = feature.properties.name;
+  const city = cityData[cityName];
+
+  const population = city
+    ? parsePopulation(city.nufus)
+    : 0;
+
+  return {
+    fillColor: getColorByPopulation(population),
+    weight: 1.5,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.75
+  };
+}
 
     // Hover efekti
     function highlightFeature(e) {
@@ -330,5 +342,19 @@
         alert('İl sınırları yüklenemedi. Lütfen internet bağlantınızı kontrol edin.');
       });
   </script>
+  function parsePopulation(popStr) {
+  if (!popStr) return 0;
+  return Number(popStr.replace(/\./g, ''));
+}
+function getColorByPopulation(population) {
+  return population > 5000000 ? '#4a1486' :
+         population > 3000000 ? '#6a1b9a' :
+         population > 2000000 ? '#7b1fa2' :
+         population > 1000000 ? '#8e24aa' :
+         population > 500000  ? '#ab47bc' :
+         population > 250000  ? '#ce93d8' :
+                                 '#ede7f6';
+}
+
 </body>
 </html>
