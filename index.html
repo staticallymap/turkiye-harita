@@ -9,88 +9,169 @@
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1 {
-      text-align: center;
-      margin: 10px 0;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    
+    /* Modern Header */
+    header {
       position: absolute;
       top: 0;
       left: 0;
-      right: 350px;
+      right: 0;
       z-index: 1000;
-      background: white;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
+    h1 {
+      color: white;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
     #container {
       display: flex;
       height: 100vh;
-      padding-top: 60px;
+      padding-top: 80px;
     }
+    
     #map {
       flex: 1;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 80px);
+      transition: all 0.3s ease;
     }
+    
+    #map.sidebar-open {
+      flex: 1;
+    }
+    
+    /* Sidebar - başta gizli */
     #sidebar {
-      width: 350px;
-      background: white;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-      overflow-y: auto;
-      padding: 20px;
+      width: 0;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.4);
+      overflow: hidden;
+      padding: 0;
+      transition: all 0.3s ease;
+      color: white;
     }
+    
+    #sidebar.active {
+      width: 380px;
+      padding: 30px;
+      overflow-y: auto;
+    }
+    
     #sidebar h2 {
       margin-top: 0;
-      color: #333;
-      border-bottom: 2px solid #3388ff;
-      padding-bottom: 10px;
+      color: white;
+      font-size: 26px;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
     }
+    
     .property {
-      margin: 15px 0;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
     }
+    
     .property label {
-      font-weight: bold;
-      color: #555;
+      font-weight: 600;
+      color: #a8b2ff;
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+    
     .property value {
-      color: #333;
-      font-size: 16px;
+      color: white;
+      font-size: 18px;
+      font-weight: 500;
     }
+    
     .info {
-      padding: 6px 8px;
+      padding: 10px 15px;
       font: 14px/16px Arial, Helvetica, sans-serif;
-      background: white;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border-radius: 5px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      border: none;
     }
+    
     .info h4 {
       margin: 0 0 5px;
-      color: #777;
+      color: white;
+      font-weight: 600;
     }
-    .placeholder {
-      color: #999;
-      font-style: italic;
-      text-align: center;
-      padding: 40px 20px;
+    
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: rotate(90deg);
+    }
+    
+    /* Scrollbar styling */
+    #sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #sidebar::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    #sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Türkiye İl Haritası</h1>
+  <header>
+    <h1>🗺️ Türkiye İl Haritası</h1>
+  </header>
+  
   <div id="container">
     <div id="map"></div>
     <div id="sidebar">
-      <div class="placeholder">
-        Bir il seçmek için harita üzerinde bir ile tıklayın
-      </div>
+      <button class="close-btn" onclick="closeSidebar()">✕</button>
     </div>
   </div>
+  
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
@@ -128,6 +209,15 @@
         console.error('İl verileri yüklenirken hata oluştu:', error);
       });
 
+    // Sidebar kapatma fonksiyonu
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('map').classList.remove('sidebar-open');
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+    }
+
     // Yan panel güncelleme fonksiyonu
     function updateSidebar(cityName) {
       var sidebar = document.getElementById('sidebar');
@@ -135,44 +225,55 @@
       
       if (data) {
         sidebar.innerHTML = `
+          <button class="close-btn" onclick="closeSidebar()">✕</button>
           <h2>${cityName}</h2>
           <div class="property">
-            <label>Plaka Kodu:</label>
+            <label>Plaka Kodu</label>
             <value>${data.plaka}</value>
           </div>
           <div class="property">
-            <label>Nüfus:</label>
+            <label>Nüfus</label>
             <value>${data.nufus}</value>
           </div>
           <div class="property">
-            <label>Bölge:</label>
+            <label>Bölge</label>
             <value>${data.bolge}</value>
           </div>
           <div class="property">
-            <label>Yüzölçümü:</label>
+            <label>Yüzölçümü</label>
             <value>${data.yuzolcumu}</value>
           </div>
         `;
       } else {
         sidebar.innerHTML = `
+          <button class="close-btn" onclick="closeSidebar()">✕</button>
           <h2>${cityName}</h2>
           <div class="property">
-            <label>Bilgi:</label>
+            <label>Bilgi</label>
             <value>Bu il için detaylı bilgi henüz eklenmedi.</value>
           </div>
         `;
       }
+      
+      // Sidebar'ı aç
+      sidebar.classList.add('active');
+      document.getElementById('map').classList.add('sidebar-open');
+      
+      // Harita boyutunu güncelle
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
     }
 
     // Stil fonksiyonu
     function style(feature) {
       return {
-        fillColor: '#3388ff',
+        fillColor: '#667eea',
         weight: 2,
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.3
+        fillOpacity: 0.4
       };
     }
 
@@ -181,9 +282,9 @@
       var layer = e.target;
       layer.setStyle({
         weight: 5,
-        color: '#666',
+        color: '#764ba2',
         dashArray: '',
-        fillOpacity: 0.7
+        fillOpacity: 0.8
       });
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
