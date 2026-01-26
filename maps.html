@@ -5,11 +5,7 @@
   <title>StaticallyMap | Haritalar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
   <style>
     * {
@@ -22,90 +18,203 @@
     body {
       height: 100vh;
       overflow: hidden;
-      background: #f5f5f5;
     }
 
-    /* Genel düzen */
     .container {
       display: flex;
       height: 100vh;
-      width: 100%;
     }
 
-    /* Harita alanı */
     #map {
       flex: 7;
-      height: 100%;
     }
 
-    /* Bilgi paneli */
     .info-panel {
       flex: 3;
-      background: #ffffff;
+      background: #fff;
       border-left: 1px solid #ddd;
       padding: 20px;
       overflow-y: auto;
     }
 
-    .info-panel h2 {
+    .badge {
+      display: inline-block;
+      background: #eee;
+      padding: 4px 8px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    h2 {
       font-size: 20px;
       margin-bottom: 10px;
     }
 
-    .info-panel p {
+    p {
       font-size: 14px;
-      color: #555;
       line-height: 1.6;
+      color: #444;
     }
 
-    /* Üst küçük başlık */
-    .badge {
-      display: inline-block;
-      background: #eaeaea;
-      color: #333;
-      padding: 4px 8px;
-      font-size: 12px;
+    .country-item {
+      padding: 8px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
       border-radius: 4px;
-      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .country-item:hover {
+      background: #f5f5f5;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- HARİTA -->
-    <div id="map"></div>
+  <div id="map"></div>
 
-    <!-- VERİ PANELİ -->
-    <div class="info-panel">
-      <span class="badge">StaticallyMap</span>
-      <h2>Dünya Haritası</h2>
-      <p>
-        Harita üzerinden önce kıta, ardından ülke seçimi yapılacaktır.
-        <br><br>
-        Seçilen bölgeye ait veriler bu panelde gösterilecektir.
-      </p>
-    </div>
-
+  <div class="info-panel" id="infoPanel">
+    <span class="badge">StaticallyMap</span>
+    <h2>Dünya Haritası</h2>
+    <p>Önce bir kıta seçin.</p>
   </div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</div>
 
-  <script>
-    // HARİTA OLUŞTUR
-    const map = L.map('map', {
-      zoomControl: true,
-      attributionControl: false
-    }).setView([20, 0], 2); // Dünya görünümü
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    // Google Maps benzeri tile (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19
+<script>
+  const map = L.map('map', {
+    zoomControl: true,
+    attributionControl: false
+  }).setView([20, 0], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  const infoPanel = document.getElementById("infoPanel");
+  let countryMarkers = [];
+
+  // KITA + ÜLKE VERİLERİ (geçici)
+  const continents = [
+    {
+      name: "Avrupa",
+      center: [54, 15],
+      zoom: 4,
+      info: "Avrupa kıtası seçildi.",
+      countries: [
+        {
+          name: "Türkiye",
+          center: [39, 35],
+          zoom: 6,
+          population: "85 milyon",
+          capital: "Ankara"
+        },
+        {
+          name: "Almanya",
+          center: [51, 10],
+          zoom: 6,
+          population: "84 milyon",
+          capital: "Berlin"
+        },
+        {
+          name: "Fransa",
+          center: [46, 2],
+          zoom: 6,
+          population: "65 milyon",
+          capital: "Paris"
+        }
+      ]
+    },
+    {
+      name: "Asya",
+      center: [34, 100],
+      zoom: 3,
+      info: "Asya kıtası seçildi.",
+      countries: [
+        {
+          name: "Japonya",
+          center: [36, 138],
+          zoom: 6,
+          population: "125 milyon",
+          capital: "Tokyo"
+        }
+      ]
+    }
+  ];
+
+  // Kıta markerları
+  continents.forEach(continent => {
+    const marker = L.circleMarker(continent.center, {
+      radius: 8,
+      color: "#000",
+      fillColor: "#000",
+      fillOpacity: 0.8
     }).addTo(map);
-  </script>
+
+    marker.on("click", () => {
+      map.setView(continent.center, continent.zoom);
+      clearCountries();
+      showContinent(continent);
+    });
+  });
+
+  function showContinent(continent) {
+    infoPanel.innerHTML = `
+      <span class="badge">Kıta</span>
+      <h2>${continent.name}</h2>
+      <p>${continent.info}</p>
+      <h3 style="margin-top:15px;">Ülkeler</h3>
+    `;
+
+    continent.countries.forEach(country => {
+      const div = document.createElement("div");
+      div.className = "country-item";
+      div.innerText = country.name;
+
+      div.onclick = () => {
+        map.setView(country.center, country.zoom);
+        showCountry(country);
+      };
+
+      infoPanel.appendChild(div);
+
+      const cMarker = L.circleMarker(country.center, {
+        radius: 6,
+        color: "#b80000",
+        fillColor: "#b80000",
+        fillOpacity: 0.9
+      }).addTo(map);
+
+      cMarker.on("click", () => {
+        map.setView(country.center, country.zoom);
+        showCountry(country);
+      });
+
+      countryMarkers.push(cMarker);
+    });
+  }
+
+  function showCountry(country) {
+    infoPanel.innerHTML = `
+      <span class="badge">Ülke</span>
+      <h2>${country.name}</h2>
+      <p><strong>Başkent:</strong> ${country.capital}</p>
+      <p><strong>Nüfus:</strong> ${country.population}</p>
+    `;
+  }
+
+  function clearCountries() {
+    countryMarkers.forEach(marker => map.removeLayer(marker));
+    countryMarkers = [];
+  }
+</script>
 
 </body>
 </html>
