@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>staticallymap</title>
+  <title>StaticallyMap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -14,115 +14,126 @@
     }
 
     body {
-      background: #f5f5f5;
+      background: #ffffff;
       color: #111;
     }
 
+    /* NAVBAR */
     header {
-      background: #000;
-      color: #fff;
-      padding: 15px 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 15px 20px;
     }
 
-    header h1 {
-      font-size: 22px;
+    nav .logo {
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
       letter-spacing: 1px;
     }
 
-    nav a {
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
       color: #fff;
-      margin-left: 20px;
       text-decoration: none;
-      font-size: 15px;
-      cursor: pointer;
+      font-size: 14px;
+      transition: opacity 0.3s;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* SECTIONS + ANIMATION */
-    section {
-      display: none;
-      padding: 40px;
-      opacity: 0;
-      transform: translateY(15px);
-    }
-
-    section.active {
-      display: block;
-      animation: fadeSlide 0.45s ease forwards;
-    }
-
-    @keyframes fadeSlide {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    nav ul li a:hover {
+      opacity: 0.7;
     }
 
     /* HERO */
     .hero {
-      height: 60vh;
+      height: 100vh;
       background: linear-gradient(
-          rgba(0,0,0,0.45),
-          rgba(0,0,0,0.45)
-        ),
-        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
-      background-size: cover;
-      background-position: center;
-      color: #fff;
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0.6)
+      ),
+      url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa") center/cover no-repeat;
       display: flex;
       align-items: center;
-      padding: 60px;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
     }
 
-    .hero h2 {
-      font-size: 42px;
-      max-width: 600px;
+    .hero-content {
+      max-width: 700px;
+      color: #fff;
     }
 
-    .hero p {
-      margin-top: 15px;
-      font-size: 18px;
-      max-width: 600px;
+    .hero-content h1 {
+      font-size: 46px;
+      margin-bottom: 20px;
     }
 
-    .hero button {
-      margin-top: 28px;
-      padding: 13px 32px;
-      font-size: 15px;
-      border: none;
-      border-radius: 30px;
-      background: #fff;
+    .hero-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .hero-content a {
+      display: inline-block;
+      padding: 14px 30px;
+      background: #ffffff;
       color: #000;
-      cursor: pointer;
-      transition: all 0.25s ease;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: transform 0.3s;
     }
 
-    .hero button:hover {
-      background: #eaeaea;
-      transform: translateY(-2px);
+    .hero-content a:hover {
+      transform: translateY(-3px);
     }
 
     /* NEWS */
+    .news-section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .news-title {
+      font-size: 28px;
+      margin-bottom: 30px;
+      border-left: 4px solid #b80000;
+      padding-left: 12px;
+    }
+
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
-      margin-top: 30px;
     }
 
     .news-card {
       background: #fff;
-      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease;
-      cursor: pointer;
+      transition: transform 0.3s;
     }
 
     .news-card:hover {
@@ -135,163 +146,97 @@
       object-fit: cover;
     }
 
-    .news-card-content {
+    .news-card .content {
       padding: 15px;
     }
 
-    .news-card-content h3 {
-      font-size: 18px;
+    .news-card h3 {
+      font-size: 16px;
       margin-bottom: 10px;
     }
 
-    .news-card-content p {
-      font-size: 14px;
-      color: #444;
+    .news-card p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
     }
 
-    .news-card-content span {
-      display: block;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #777;
-    }
-
-    .simple-page h2 {
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    .simple-page p {
-      max-width: 700px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
+    /* FOOTER */
     footer {
       background: #111;
-      color: #ccc;
-      padding: 25px;
+      color: #aaa;
       text-align: center;
-      font-size: 14px;
+      padding: 30px 20px;
+      font-size: 13px;
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>staticallymap</h1>
-  <nav>
-    <a onclick="showSection('home')">Anasayfa</a>
-    <a onclick="showSection('maps')">Haritalar</a>
-    <a onclick="showSection('news')">Haberler</a>
-    <a onclick="showSection('analysis')">Analiz</a>
-    <a onclick="showSection('about')">Hakkımızda</a>
-  </nav>
-</header>
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">StaticallyMap</div>
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="maps.html">Haritalar</a></li>
+        <li><a href="#">Veriler</a></li>
+        <li><a href="#">Projeler</a></li>
+        <li><a href="#">Hakkımızda</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<section id="home" class="active">
-  <div class="hero">
-    <div>
-      <h2>Haritalarla veriyi, haberlerle dünyayı okuyun</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Dünyayı Verilerle Keşfet</h1>
       <p>
-        staticallymap, küresel olayları haritalar ve
-        veri temelli içeriklerle bir araya getirir.
+        Kıtalar, ülkeler ve coğrafi veriler tek bir harita üzerinde.
+        Dünya ölçeğinde analiz ve görselleştirme deneyimi.
       </p>
-      <button onclick="showSection('maps')">Keşfet</button>
+      <a href="maps.html">Keşfet</a>
     </div>
-  </div>
+  </section>
 
-  <h2 style="margin-top:40px;">Gündem</h2>
-  <div class="news-grid" id="homeNews"></div>
-</section>
+  <!-- NEWS -->
+  <section class="news-section">
+    <h2 class="news-title">Güncel Harita & Dünya Haberleri</h2>
 
-<section id="maps" class="simple-page">
-  <h2>Haritalar</h2>
-  <p>
-    Etkileşimli haritalar, tematik veri katmanları
-    ve coğrafi analizler bu bölümde yer alacaktır.
-  </p>
-</section>
+    <div class="news-grid">
 
-<section id="news" class="simple-page">
-  <h2>Haberler</h2>
-  <div class="news-grid" id="allNews"></div>
-</section>
-
-<section id="analysis" class="simple-page">
-  <h2>Analiz</h2>
-  <p>Uzman yorumları ve derinlemesine veri incelemeleri.</p>
-</section>
-
-<section id="about" class="simple-page">
-  <h2>Hakkımızda</h2>
-  <p>
-    staticallymap; haritalar, haberler ve analizleri
-    bir araya getiren bağımsız bir dijital platformdur.
-  </p>
-</section>
-
-<footer>
-  © 2026 staticallymap • Tüm hakları saklıdır
-</footer>
-
-<script>
-  const newsData = [
-    {
-      title: "Küresel iklim değişikliği kritik seviyeye ulaştı",
-      desc: "Yeni ölçümler, dünya genelinde sıcaklık artışının hızlandığını gösteriyor.",
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
-      tag: "Doğa • Bugün"
-    },
-    {
-      title: "Uydu haritaları yeni risk bölgelerini ortaya koydu",
-      desc: "Veri analizleriyle oluşturulan haritalar kritik alanları işaret ediyor.",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
-      tag: "Haritalar • Bugün"
-    },
-    {
-      title: "Doğal afetlerin coğrafi dağılımı değişiyor",
-      desc: "Son veriler, afetlerin yön değiştirdiğini ortaya koyuyor.",
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      tag: "Dünya • Bugün"
-    }
-  ];
-
-  function renderNews(containerId, limit = newsData.length) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-
-    newsData.slice(0, limit).forEach(news => {
-      container.innerHTML += `
-        <div class="news-card">
-          <img src="${news.image}">
-          <div class="news-card-content">
-            <h3>${news.title}</h3>
-            <p>${news.desc}</p>
-            <span>${news.tag}</span>
-          </div>
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1581091012184-5c7c14e02a7c">
+        <div class="content">
+          <h3>İklim Değişikliği Haritalarla Nasıl Okunur?</h3>
+          <p>Uydu verileri ve küresel haritalar, iklim krizini anlamamıza nasıl yardımcı oluyor?</p>
         </div>
-      `;
-    });
-  }
+      </div>
 
-  function showSection(id) {
-    document.querySelectorAll("section").forEach(s => {
-      s.classList.remove("active");
-    });
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e">
+        <div class="content">
+          <h3>Kıtalar Arası Nüfus Yoğunluğu Analizi</h3>
+          <p>Dünya nüfusu hangi bölgelerde yoğunlaşıyor? Haritalarla inceleyelim.</p>
+        </div>
+      </div>
 
-    const target = document.getElementById(id);
-    target.classList.add("active");
+      <div class="news-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+        <div class="content">
+          <h3>Doğal Kaynaklar ve Coğrafi Dağılım</h3>
+          <p>Enerji, su ve maden kaynaklarının küresel harita üzerindeki dağılımı.</p>
+        </div>
+      </div>
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
+    </div>
+  </section>
 
-  renderNews("homeNews", 3);
-  renderNews("allNews");
-</script>
+  <!-- FOOTER -->
+  <footer>
+    © 2026 StaticallyMap — Tüm hakları saklıdır.
+  </footer>
 
 </body>
 </html>
