@@ -1,52 +1,104 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Türkiye Haritası</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#1a1a2e; color:white; }
+<meta charset="UTF-8">
+<title>GeoStats | Türkiye Haritası</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px 40px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    header h1 { font-size:28px; }
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
-    #container { display:flex; height:100vh; }
-    #map { flex:1; }
-    #sidebar {
-      width:0;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      overflow:hidden;
-      padding:0;
-      transition:0.3s;
-      color:white;
-    }
-    #sidebar.active { width:380px; padding:30px; overflow-y:auto; }
-    #sidebar h2 { margin-top:0; border-bottom:3px solid #667eea; padding-bottom:15px; margin-bottom:20px; }
-    .property { margin:20px 0; background:rgba(255,255,255,0.1); padding:15px; border-radius:10px; backdrop-filter:blur(10px); }
-    .property label { display:block; margin-bottom:8px; font-weight:600; color:#a8b2ff; font-size:13px; text-transform:uppercase; letter-spacing:1px; }
-    .property value { font-size:18px; font-weight:500; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Segoe UI,system-ui;
+background:#0f172a;
+color:white;
+}
 
-    .close-btn {
-      position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.2); border:none; color:white;
-      width:35px; height:35px; border-radius:50%; cursor:pointer; font-size:20px; display:flex; align-items:center; justify-content:center;
-      transition:0.3s;
-    }
-    .close-btn:hover { background:rgba(255,255,255,0.3); transform:rotate(90deg); }
+header{
+background:linear-gradient(135deg,#667eea,#764ba2);
+padding:20px 40px;
+text-align:center;
+}
 
-    .info { padding:10px 15px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; box-shadow:0 4px 15px rgba(0,0,0,0.3); border-radius:10px; }
-    .info h4 { margin:0 0 5px; }
-  </style>
+header h1{
+font-size:26px;
+}
+
+#container{
+display:flex;
+height:calc(100vh - 72px);
+}
+
+#map{
+flex:1;
+}
+
+#sidebar{
+width:0;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+overflow:hidden;
+transition:.3s;
+padding:0;
+}
+
+#sidebar.active{
+width:380px;
+padding:30px;
+overflow-y:auto;
+}
+
+#sidebar h2{
+margin-bottom:20px;
+border-bottom:2px solid #667eea;
+padding-bottom:10px;
+}
+
+.property{
+margin:15px 0;
+background:rgba(255,255,255,.1);
+padding:12px;
+border-radius:10px;
+}
+
+.property label{
+display:block;
+font-size:12px;
+letter-spacing:1px;
+color:#a8b2ff;
+margin-bottom:5px;
+}
+
+.property value{
+font-size:17px;
+}
+
+.close-btn{
+position:absolute;
+top:20px;
+right:20px;
+background:rgba(255,255,255,.2);
+border:none;
+color:white;
+width:32px;
+height:32px;
+border-radius:50%;
+cursor:pointer;
+font-size:18px;
+}
+
+.info{
+padding:10px 14px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+border-radius:10px;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>🗺️ Türkiye Haritası ve Verileri</h1>
+<h1>🗺️ Türkiye Haritası ve İstatistikler</h1>
 </header>
 
 <div id="container">
@@ -57,141 +109,106 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-// Türkiye illeri verileri
-var cityData = { "Adana": {"plaka":1,"nufus":2237942,"yillikArtis":0.8,"bolge":"Akdeniz","yuzolcumu":14003},
-  "Adıyaman":{"plaka":2,"nufus":632927,"yillikArtis":1.0,"bolge":"Güneydoğu Anadolu","yuzolcumu":7573},
-  "Afyonkarahisar":{"plaka":3,"nufus":729237,"yillikArtis":0.5,"bolge":"İç Anadolu","yuzolcumu":14013},
-  "Ağrı":{"plaka":4,"nufus":536427,"yillikArtis":0.3,"bolge":"Doğu Anadolu","yuzolcumu":11099},
-  "Amasya":{"plaka":5,"nufus":335494,"yillikArtis":0.2,"bolge":"Karadeniz","yuzolcumu":5722},
-  "Ankara":{"plaka":6,"nufus":5663322,"yillikArtis":1.1,"bolge":"İç Anadolu","yuzolcumu":25680},
-  "Antalya":{"plaka":7,"nufus":2586563,"yillikArtis":1.5,"bolge":"Akdeniz","yuzolcumu":20109},
-  "Artvin":{"plaka":8,"nufus":169501,"yillikArtis":0.1,"bolge":"Karadeniz","yuzolcumu":7427},
-  "Aydın":{"plaka":9,"nufus":1118365,"yillikArtis":0.9,"bolge":"Ege","yuzolcumu":8092},
-  "Balıkesir":{"plaka":10,"nufus":1236517,"yillikArtis":0.7,"bolge":"Marmara","yuzolcumu":14185},
-  "Bilecik":{"plaka":11,"nufus":227954,"yillikArtis":0.3,"bolge":"Marmara","yuzolcumu":4087},
-  "Bingöl":{"plaka":12,"nufus":281553,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":8042},
-  "Bitlis":{"plaka":13,"nufus":348028,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":10803},
-  "Bolu":{"plaka":14,"nufus":320505,"yillikArtis":0.4,"bolge":"Karadeniz","yuzolcumu":8126},
-  "Burdur":{"plaka":15,"nufus":270796,"yillikArtis":0.5,"bolge":"Akdeniz","yuzolcumu":7344},
-  "Bursa":{"plaka":16,"nufus":3056120,"yillikArtis":1.2,"bolge":"Marmara","yuzolcumu":10900},
-  "Çanakkale":{"plaka":17,"nufus":552206,"yillikArtis":0.6,"bolge":"Marmara","yuzolcumu":9692},
-  "Çankırı":{"plaka":18,"nufus":195789,"yillikArtis":0.2,"bolge":"İç Anadolu","yuzolcumu":7416},
-  "Çorum":{"plaka":19,"nufus":526614,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":12436},
-  "Denizli":{"plaka":20,"nufus":1069214,"yillikArtis":0.7,"bolge":"Ege","yuzolcumu":11169},
-  "Diyarbakır":{"plaka":21,"nufus":1839096,"yillikArtis":1.0,"bolge":"Güneydoğu Anadolu","yuzolcumu":15576},
-  "Edirne":{"plaka":22,"nufus":409321,"yillikArtis":0.3,"bolge":"Marmara","yuzolcumu":6427},
-  "Elazığ":{"plaka":23,"nufus":583828,"yillikArtis":0.4,"bolge":"Doğu Anadolu","yuzolcumu":9480},
-  "Erzincan":{"plaka":24,"nufus":238747,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":11619},
-  "Erzurum":{"plaka":25,"nufus":762021,"yillikArtis":0.3,"bolge":"Doğu Anadolu","yuzolcumu":25006},
-  "Eskişehir":{"plaka":26,"nufus":887475,"yillikArtis":0.6,"bolge":"İç Anadolu","yuzolcumu":13254},
-  "Gaziantep":{"plaka":27,"nufus":2129974,"yillikArtis":1.3,"bolge":"Güneydoğu Anadolu","yuzolcumu":7244},
-  "Giresun":{"plaka":28,"nufus":448721,"yillikArtis":0.3,"bolge":"Karadeniz","yuzolcumu":7154},
-  "Gümüşhane":{"plaka":29,"nufus":168126,"yillikArtis":0.1,"bolge":"Karadeniz","yuzolcumu":6470},
-  "Hakkari":{"plaka":30,"nufus":282906,"yillikArtis":0.3,"bolge":"Doğu Anadolu","yuzolcumu":7727},
-  "Hatay":{"plaka":31,"nufus":1682845,"yillikArtis":0.9,"bolge":"Akdeniz","yuzolcumu":5453},
-  "Isparta":{"plaka":32,"nufus":444623,"yillikArtis":0.4,"bolge":"Akdeniz","yuzolcumu":8200},
-  "Mersin":{"plaka":33,"nufus":1934000,"yillikArtis":1.0,"bolge":"Akdeniz","yuzolcumu":15334},
-  "İstanbul":{"plaka":34,"nufus":15840912,"yillikArtis":1.2,"bolge":"Marmara","yuzolcumu":5461},
-  "İzmir":{"plaka":35,"nufus":4424645,"yillikArtis":0.8,"bolge":"Ege","yuzolcumu":11891},
-  "Kars":{"plaka":36,"nufus":283092,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":9634},
-  "Kastamonu":{"plaka":37,"nufus":378295,"yillikArtis":0.3,"bolge":"Karadeniz","yuzolcumu":13461},
-  "Kayseri":{"plaka":38,"nufus":1416712,"yillikArtis":0.7,"bolge":"İç Anadolu","yuzolcumu":16933},
-  "Kırklareli":{"plaka":39,"nufus":362361,"yillikArtis":0.2,"bolge":"Marmara","yuzolcumu":6376},
-  "Kırşehir":{"plaka":40,"nufus":243234,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":6370},
-  "Kocaeli":{"plaka":41,"nufus":1994575,"yillikArtis":1.0,"bolge":"Marmara","yuzolcumu":3312},
-  "Konya":{"plaka":42,"nufus":2238970,"yillikArtis":0.7,"bolge":"İç Anadolu","yuzolcumu":39717},
-  "Kütahya":{"plaka":43,"nufus":579914,"yillikArtis":0.4,"bolge":"İç Anadolu","yuzolcumu":11713},
-  "Malatya":{"plaka":44,"nufus":806156,"yillikArtis":0.5,"bolge":"Doğu Anadolu","yuzolcumu":12249},
-  "Manisa":{"plaka":45,"nufus":1406073,"yillikArtis":0.6,"bolge":"Ege","yuzolcumu":13682},
-  "Kahramanmaraş":{"plaka":46,"nufus":1224445,"yillikArtis":0.5,"bolge":"Güneydoğu Anadolu","yuzolcumu":14130},
-  "Mardin":{"plaka":47,"nufus":854716,"yillikArtis":0.7,"bolge":"Güneydoğu Anadolu","yuzolcumu":8866},
-  "Muğla":{"plaka":48,"nufus":1083500,"yillikArtis":0.9,"bolge":"Ege","yuzolcumu":12772},
-  "Muş":{"plaka":49,"nufus":411953,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":8557},
-  "Nevşehir":{"plaka":50,"nufus":308011,"yillikArtis":0.4,"bolge":"İç Anadolu","yuzolcumu":5489},
-  "Niğde":{"plaka":51,"nufus":362483,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":7360},
-  "Ordu":{"plaka":52,"nufus":748555,"yillikArtis":0.5,"bolge":"Karadeniz","yuzolcumu":5961},
-  "Rize":{"plaka":53,"nufus":342137,"yillikArtis":0.3,"bolge":"Karadeniz","yuzolcumu":3926},
-  "Sakarya":{"plaka":54,"nufus":1070443,"yillikArtis":0.7,"bolge":"Marmara","yuzolcumu":4944},
-  "Samsun":{"plaka":55,"nufus":1366340,"yillikArtis":0.6,"bolge":"Karadeniz","yuzolcumu":9376},
-  "Siirt":{"plaka":56,"nufus":320350,"yillikArtis":0.3,"bolge":"Güneydoğu Anadolu","yuzolcumu":5869},
-  "Sinop":{"plaka":57,"nufus":216001,"yillikArtis":0.2,"bolge":"Karadeniz","yuzolcumu":5860},
-  "Sivas":{"plaka":58,"nufus":635264,"yillikArtis":0.4,"bolge":"İç Anadolu","yuzolcumu":28479},
-  "Tekirdağ":{"plaka":59,"nufus":1110490,"yillikArtis":0.6,"bolge":"Marmara","yuzolcumu":6376},
-  "Tokat":{"plaka":60,"nufus":601315,"yillikArtis":0.3,"bolge":"Karadeniz","yuzolcumu":10905},
-  "Trabzon":{"plaka":61,"nufus":817903,"yillikArtis":0.5,"bolge":"Karadeniz","yuzolcumu":4687},
-  "Tunceli":{"plaka":62,"nufus":86885,"yillikArtis":0.1,"bolge":"Doğu Anadolu","yuzolcumu":7582},
-  "Şanlıurfa":{"plaka":63,"nufus":2193167,"yillikArtis":1.1,"bolge":"Güneydoğu Anadolu","yuzolcumu":19321},
-  "Uşak":{"plaka":64,"nufus":372698,"yillikArtis":0.3,"bolge":"Ege","yuzolcumu":5555},
-  "Van":{"plaka":65,"nufus":1149731,"yillikArtis":0.5,"bolge":"Doğu Anadolu","yuzolcumu":19691},
-  "Yozgat":{"plaka":66,"nufus":421127,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":13820},
-  "Zonguldak":{"plaka":67,"nufus":593194,"yillikArtis":0.4,"bolge":"Karadeniz","yuzolcumu":3672},
-  "Aksaray":{"plaka":68,"nufus":432443,"yillikArtis":0.4,"bolge":"İç Anadolu","yuzolcumu":7607},
-  "Bayburt":{"plaka":69,"nufus":82400,"yillikArtis":0.1,"bolge":"Karadeniz","yuzolcumu":3734},
-  "Karaman":{"plaka":70,"nufus":246925,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":8797},
-  "Kırıkkale":{"plaka":71,"nufus":277892,"yillikArtis":0.3,"bolge":"İç Anadolu","yuzolcumu":4300},
-  "Batman":{"plaka":72,"nufus":619552,"yillikArtis":0.7,"bolge":"Güneydoğu Anadolu","yuzolcumu":4752},
-  "Şırnak":{"plaka":73,"nufus":537689,"yillikArtis":0.6,"bolge":"Güneydoğu Anadolu","yuzolcumu":7155},
-  "Bartın":{"plaka":74,"nufus":199810,"yillikArtis":0.2,"bolge":"Karadeniz","yuzolcumu":2376},
-  "Ardahan":{"plaka":75,"nufus":96388,"yillikArtis":0.1,"bolge":"Doğu Anadolu","yuzolcumu":4730},
-  "Iğdır":{"plaka":76,"nufus":199948,"yillikArtis":0.2,"bolge":"Doğu Anadolu","yuzolcumu":3535},
-  "Yalova":{"plaka":77,"nufus":267818,"yillikArtis":0.3,"bolge":"Marmara","yuzolcumu":847},
-  "Karabük":{"plaka":78,"nufus":250505,"yillikArtis":0.3,"bolge":"Karadeniz","yuzolcumu":4128},
-  "Kilis":{"plaka":79,"nufus":145074,"yillikArtis":0.2,"bolge":"Güneydoğu Anadolu","yuzolcumu":1411},
-  "Osmaniye":{"plaka":80,"nufus":536378,"yillikArtis":0.4,"bolge":"Akdeniz","yuzolcumu":3383},
-  "Düzce":{"plaka":81,"nufus":393730,"yillikArtis":0.3,"bolge":"Marmara","yuzolcumu":2446}
-/ };
+/* === İL VERİLERİ === */
+var cityData = {
+"Adana":{"plaka":1,"nufus":2237942,"yillikArtis":0.8,"bolge":"Akdeniz","yuzolcumu":14003},
+"Ankara":{"plaka":6,"nufus":5663322,"yillikArtis":1.1,"bolge":"İç Anadolu","yuzolcumu":25680},
+"İstanbul":{"plaka":34,"nufus":15840912,"yillikArtis":1.2,"bolge":"Marmara","yuzolcumu":5461},
+"İzmir":{"plaka":35,"nufus":4424645,"yillikArtis":0.8,"bolge":"Ege","yuzolcumu":11891},
+"Antalya":{"plaka":7,"nufus":2586563,"yillikArtis":1.5,"bolge":"Akdeniz","yuzolcumu":20109},
+"Bursa":{"plaka":16,"nufus":3056120,"yillikArtis":1.2,"bolge":"Marmara","yuzolcumu":10900}
+};
 
-// Harita değişkenleri
-var map, geojson;
-function initMap(){
-  map = L.map('map').setView([39.0, 35.0], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+/* === HARİTA === */
+var map = L.map('map').setView([39,35],6);
 
-  var info = L.control();
-  info.onAdd = function(map){ this._div=L.DomUtil.create('div','info'); this.update(); return this._div; };
-  info.update = function(props){ this._div.innerHTML='<h4>Türkiye İlleri</h4>'+(props?'<b>'+props.name+'</b>':'Bir il üzerine gelin'); };
-  info.addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
 
-  function getColorByPopulation(pop){
-    return pop>5000000?'#4a1486':pop>3000000?'#6a1b9a':pop>2000000?'#7b1fa2':pop>1000000?'#8e24aa':pop>500000?'#ab47bc':pop>250000?'#ce93d8':'#ede7f6';
-  }
-  function style(feature){
-    var city = cityData[feature.properties.name];
-    var pop = city?city.nufus:0;
-    return {fillColor:getColorByPopulation(pop),weight:1.5,color:'white',fillOpacity:0.75};
-  }
-  function highlightFeature(e){ var l=e.target; l.setStyle({weight:5,color:'#764ba2',fillOpacity:0.8}); l.bringToFront(); info.update(l.feature.properties);}
-  function resetHighlight(e){ geojson.resetStyle(e.target); info.update(); }
-  function zoomToFeature(e){ map.fitBounds(e.target.getBounds()); updateSidebar(e.target.feature.properties.name);}
-  function onEachFeature(f,l){ l.on({mouseover:highlightFeature,mouseout:resetHighlight,click:zoomToFeature}); }
+var info = L.control();
+info.onAdd = function(){
+this._div = L.DomUtil.create('div','info');
+this.update();
+return this._div;
+};
+info.update = function(props){
+this._div.innerHTML = '<b>Türkiye</b><br>'+(props?props.name:'İl seçin');
+};
+info.addTo(map);
 
-  geojson = L.geoJson(null,{style:style,onEachFeature:onEachFeature}).addTo(map);
-  fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json')
-    .then(res=>res.json()).then(data=>geojson.addData(data)).catch(err=>{console.error(err); alert('İl sınırları yüklenemedi!');});
+function getColor(pop){
+return pop>5000000?'#4a1486':
+pop>3000000?'#6a1b9a':
+pop>2000000?'#7b1fa2':
+pop>1000000?'#8e24aa':
+'#ce93d8';
 }
 
-// Sidebar ve detaylar
-function closeSidebar(){document.getElementById('sidebar').classList.remove('active'); setTimeout(()=>{map.invalidateSize();},300);}
-function updateSidebar(cityName){
-  var sidebar=document.getElementById('sidebar');
-  var data=cityData[cityName];
-  if(data){
-    sidebar.innerHTML=`<button class="close-btn" onclick="closeSidebar()">✕</button><h2>${cityName}</h2>
-    <div class="property"><label>Plaka Kodu</label><value>${data.plaka}</value></div>
-    <div class="property"><label>Nüfus</label><value>${data.nufus}</value></div>
-    <div class="property"><label>Yıllık Artış (%)</label><value>${data.yillikArtis}</value></div>
-    <div class="property"><label>Bölge</label><value>${data.bolge}</value></div>
-    <div class="property"><label>Yüzölçümü (km²)</label><value>${data.yuzolcumu}</value></div>`;
-  } else {
-    sidebar.innerHTML=`<button class="close-btn" onclick="closeSidebar()">✕</button><h2>${cityName}</h2>
-    <div class="property"><label>Bilgi</label><value>Detay eklenmedi</value></div>`;
-  }
-  sidebar.classList.add('active'); setTimeout(()=>{map.invalidateSize();},300);
+function style(feature){
+var c = cityData[feature.properties.name];
+return{
+fillColor:getColor(c?c.nufus:0),
+weight:1,
+color:'#fff',
+fillOpacity:.75
+};
 }
 
-// Sayfa yüklendiğinde haritayı başlat
-window.onload = initMap;
+function highlight(e){
+var l=e.target;
+l.setStyle({weight:4,color:'#fff'});
+info.update(l.feature.properties);
+}
+
+function reset(e){
+geojson.resetStyle(e.target);
+info.update();
+}
+
+function clickCity(e){
+map.fitBounds(e.target.getBounds());
+updateSidebar(e.target.feature.properties.name);
+}
+
+function onEach(f,l){
+l.on({mouseover:highlight,mouseout:reset,click:clickCity});
+}
+
+var geojson = L.geoJson(null,{style:style,onEachFeature:onEach}).addTo(map);
+
+fetch('https://raw.githubusercontent.com/cihadturhan/tr-geojson/master/geo/tr-cities-utf8.json')
+.then(r=>r.json())
+.then(d=>geojson.addData(d));
+
+function updateSidebar(name){
+var s=document.getElementById('sidebar');
+var d=cityData[name];
+
+if(d){
+s.innerHTML=`
+<button class="close-btn" onclick="closeSidebar()">✕</button>
+<h2>${name}</h2>
+<div class="property"><label>Plaka</label><value>${d.plaka}</value></div>
+<div class="property"><label>Nüfus</label><value>${d.nufus.toLocaleString()}</value></div>
+<div class="property"><label>Yıllık Artış %</label><value>${d.yillikArtis}</value></div>
+<div class="property"><label>Bölge</label><value>${d.bolge}</value></div>
+<div class="property"><label>Yüzölçümü km²</label><value>${d.yuzolcumu}</value></div>
+`;
+}else{
+s.innerHTML=`<button class="close-btn" onclick="closeSidebar()">✕</button><h2>${name}</h2><p>Detay eklenmedi</p>`;
+}
+
+s.classList.add('active');
+setTimeout(()=>map.invalidateSize(),300);
+}
+
+function closeSidebar(){
+document.getElementById('sidebar').classList.remove('active');
+setTimeout(()=>map.invalidateSize(),300);
+}
 </script>
 
 </body>
