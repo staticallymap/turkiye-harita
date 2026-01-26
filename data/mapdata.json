@@ -1,0 +1,48 @@
+{
+  "continents": [
+    {
+      "name": "Avrupa",
+      "center": [54, 15],
+      "zoom": 4,
+      "info": "Avrupa, gelişmiş ekonomiler ve yoğun nüfus yapısıyla öne çıkar.",
+      "countries": [
+        {
+          "name": "Türkiye",
+          "center": [39, 35],
+          "zoom": 6,
+          "capital": "Ankara",
+          "population": "85 milyon"
+        },
+        {
+          "name": "Almanya",
+          "center": [51, 10],
+          "zoom": 6,
+          "capital": "Berlin",
+          "population": "84 milyon"
+        },
+        {
+          "name": "Fransa",
+          "center": [46, 2],
+          "zoom": 6,
+          "capital": "Paris",
+          "population": "65 milyon"
+        }
+      ]
+    },
+    {
+      "name": "Asya",
+      "center": [34, 100],
+      "zoom": 3,
+      "info": "Asya, dünyanın en büyük ve en kalabalık kıtasıdır.",
+      "countries": [
+        {
+          "name": "Japonya",
+          "center": [36, 138],
+          "zoom": 6,
+          "capital": "Tokyo",
+          "population": "125 milyon"
+        }
+      ]
+    }
+  ]
+}
