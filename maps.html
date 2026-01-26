@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>StaticallyMap | Haritalar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    /* Genel düzen */
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    /* Harita alanı */
+    #map {
+      flex: 7;
+      height: 100%;
+    }
+
+    /* Bilgi paneli */
+    .info-panel {
+      flex: 3;
+      background: #ffffff;
+      border-left: 1px solid #ddd;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .info-panel h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .info-panel p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Üst küçük başlık */
+    .badge {
+      display: inline-block;
+      background: #eaeaea;
+      color: #333;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HARİTA -->
+    <div id="map"></div>
+
+    <!-- VERİ PANELİ -->
+    <div class="info-panel">
+      <span class="badge">StaticallyMap</span>
+      <h2>Dünya Haritası</h2>
+      <p>
+        Harita üzerinden önce kıta, ardından ülke seçimi yapılacaktır.
+        <br><br>
+        Seçilen bölgeye ait veriler bu panelde gösterilecektir.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // HARİTA OLUŞTUR
+    const map = L.map('map', {
+      zoomControl: true,
+      attributionControl: false
+    }).setView([20, 0], 2); // Dünya görünümü
+
+    // Google Maps benzeri tile (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19
+    }).addTo(map);
+  </script>
+
+</body>
+</html>
