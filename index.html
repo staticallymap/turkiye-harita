@@ -5,240 +5,272 @@
   <title>StaticallyMap | Harita & Haber Platformu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  body {
-    background: #f9fafb;
-    color: #111827;
-  }
-
-  /* HEADER */
-  header {
-    background: #ffffff;
-    padding: 20px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: #065f46;
-  }
-
-  nav a {
-    margin-left: 28px;
-    text-decoration: none;
-    color: #374151;
-    font-weight: 500;
-  }
-
-  nav a:hover {
-    color: #065f46;
-  }
-
-  /* HERO */
-  .hero {
-    padding: 110px 60px;
-    background: linear-gradient(135deg, #064e3b, #022c22);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .hero-text {
-    max-width: 620px;
-  }
-
-  .hero-text h1 {
-    font-size: 46px;
-    margin-bottom: 22px;
-    line-height: 1.2;
-  }
-
-  .hero-text p {
-    font-size: 17px;
-    opacity: 0.9;
-    margin-bottom: 32px;
-  }
-
-  .hero-text button {
-    padding: 14px 34px;
-    background: #ecfdf5;
-    color: #065f46;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .hero-text button:hover {
-    background: #d1fae5;
-  }
-
-  .hero-visual {
-    background: rgba(255,255,255,0.12);
-    padding: 44px;
-    border-radius: 20px;
-    font-size: 82px;
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 90px 60px;
-  }
-
-  .section-title {
-    font-size: 30px;
-    margin-bottom: 18px;
-  }
-
-  .section-desc {
-    max-width: 720px;
-    color: #4b5563;
-    margin-bottom: 50px;
-    line-height: 1.6;
-  }
-
-  /* CARDS */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 32px;
-  }
-
-  .card {
-    background: white;
-    padding: 32px;
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-    transition: all 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-6px);
-    border-color: #10b981;
-  }
-
-  .card h3 {
-    margin-bottom: 14px;
-    font-size: 18px;
-  }
-
-  .card p {
-    color: #4b5563;
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
-
-  /* FOOTER */
-  footer {
-    background: #022c22;
-    color: #a7f3d0;
-    padding: 42px 60px;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  footer span {
-    color: #34d399;
-    font-weight: 600;
-  }
-
-  @media(max-width: 768px) {
-    .hero {
-      flex-direction: column;
-      text-align: center;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-  }
-</style>
 
+    body {
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    /* HEADER */
+    header {
+      background: #ffffff;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #065f46;
+    }
+
+    nav a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #065f46;
+    }
+
+    #themeToggle {
+      margin-left: 30px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 110px 60px;
+      background: linear-gradient(135deg, #064e3b, #022c22);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-text {
+      max-width: 620px;
+    }
+
+    .hero-text h1 {
+      font-size: 46px;
+      margin-bottom: 22px;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 17px;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+
+    .hero-text button {
+      padding: 14px 34px;
+      background: #ecfdf5;
+      color: #065f46;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero-visual {
+      background: rgba(255,255,255,0.12);
+      padding: 44px;
+      border-radius: 20px;
+      font-size: 82px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 90px 60px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .section-desc {
+      max-width: 720px;
+      color: #4b5563;
+      margin-bottom: 50px;
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: white;
+      padding: 32px;
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #10b981;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #022c22;
+      color: #a7f3d0;
+      padding: 42px 60px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer span {
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    /* DARK MODE */
+    body.dark {
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    body.dark header,
+    body.dark footer,
+    body.dark .card {
+      background: #020617;
+      border-color: #1e293b;
+    }
+
+    @media(max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">StaticallyMap</div>
-    <nav>
-      <a href="#">Anasayfa</a>
-      <a href="#">Haritalar</a>
-      <a href="#">Haberler</a>
-      <a href="#">Hakkında</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">StaticallyMap</div>
+  <nav>
+    <a onclick="showPage('home')">Anasayfa</a>
+    <a onclick="showPage('maps')">Haritalar</a>
+    <a onclick="showPage('news')">Haberler</a>
+    <a onclick="showPage('about')">Hakkında</a>
+  </nav>
+  <button id="themeToggle">🌙</button>
+</header>
 
-  <!-- HERO -->
+<!-- HOME -->
+<div id="home" class="page">
   <div class="hero">
     <div class="hero-text">
       <h1>Haritalar, Veriler ve Güncel Haberler</h1>
-      <p>
-        StaticallyMap; coğrafi verileri, harita tabanlı analizleri ve güncel
-        haberleri sade, hızlı ve modern bir deneyimle sunar.
-      </p>
+      <p>StaticallyMap; harita tabanlı analizler ve güncel haberleri sade biçimde sunar.</p>
       <button>Haritaları Keşfet</button>
     </div>
     <div class="hero-visual">🗺️</div>
   </div>
 
-  <!-- ABOUT -->
   <section>
     <h2 class="section-title">StaticallyMap Nedir?</h2>
     <p class="section-desc">
-      StaticallyMap; statik haritalar, bölgesel analizler ve
-      harita destekli haberleri tek bir platformda toplayan
-      modern bir bilgi merkezidir.
+      Harita destekli veri, analiz ve haberleri tek platformda sunan modern bir bilgi merkezi.
     </p>
 
     <div class="cards">
-      <div class="card">
-        <h3>📍 Harita Tabanlı İçerik</h3>
-        <p>
-          Ülkeler, şehirler ve bölgeler üzerinden görselleştirilmiş
-          veriler ve analizler.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📰 Güncel Haberler</h3>
-        <p>
-          Coğrafya, çevre, afetler ve dünya gündemiyle ilgili
-          harita destekli haberler.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>⚡ Hızlı & Sade</h3>
-        <p>
-          Statik yapı sayesinde hızlı yüklenen,
-          dikkat dağıtmayan modern bir deneyim.
-        </p>
-      </div>
+      <div class="card"><h3>📍 Haritalar</h3><p>Bölgesel analizler</p></div>
+      <div class="card"><h3>📰 Haberler</h3><p>Güncel coğrafi içerikler</p></div>
+      <div class="card"><h3>⚡ Hız</h3><p>Statik yapı ile yüksek performans</p></div>
     </div>
   </section>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 <span>StaticallyMap</span> · Harita & Haber Platformu
-  </footer>
+<!-- MAPS -->
+<div id="maps" class="page" style="display:none;">
+  <section>
+    <h2 class="section-title">Haritalar</h2>
+    <p class="section-desc">Yakında interaktif haritalar eklenecek.</p>
+  </section>
+</div>
+
+<!-- NEWS -->
+<div id="news" class="page" style="display:none;">
+  <section>
+    <h2 class="section-title">Haberler</h2>
+    <div class="cards" id="newsContainer"></div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page" style="display:none;">
+  <section>
+    <h2 class="section-title">Hakkında</h2>
+    <p class="section-desc">
+      StaticallyMap, harita ve haberleri birleştiren modern bir projedir.
+    </p>
+  </section>
+</div>
+
+<footer>
+  © 2026 <span>StaticallyMap</span>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+
+  const newsData = [
+    { title: "Ege'de Deprem", text: "Deprem harita üzerinde analiz edildi." },
+    { title: "Türkiye Sıcaklık Haritası", text: "30 yıllık veriler görselleştirildi." },
+    { title: "Avrupa Sel Riskleri", text: "Yeni risk haritaları yayınlandı." }
+  ];
+
+  const newsContainer = document.getElementById("newsContainer");
+  newsData.forEach(n => {
+    const c = document.createElement("div");
+    c.className = "card";
+    c.innerHTML = `<h3>📰 ${n.title}</h3><p>${n.text}</p>`;
+    newsContainer.appendChild(c);
+  });
+
+  document.getElementById("themeToggle").onclick = () => {
+    document.body.classList.toggle("dark");
+    themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+  };
+</script>
 
 </body>
 </html>
