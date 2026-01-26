@@ -63,7 +63,6 @@
       border: 1px solid #ddd;
       border-radius: 4px;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
     .country-item:hover {
@@ -75,15 +74,13 @@
 <body>
 
 <div class="container">
-
   <div id="map"></div>
 
   <div class="info-panel" id="infoPanel">
     <span class="badge">StaticallyMap</span>
     <h2>Dünya Haritası</h2>
-    <p>Önce bir kıta seçin.</p>
+    <p>Bir kıta seçin.</p>
   </div>
-
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -101,69 +98,26 @@
   const infoPanel = document.getElementById("infoPanel");
   let countryMarkers = [];
 
-  // KITA + ÜLKE VERİLERİ (geçici)
-  const continents = [
-    {
-      name: "Avrupa",
-      center: [54, 15],
-      zoom: 4,
-      info: "Avrupa kıtası seçildi.",
-      countries: [
-        {
-          name: "Türkiye",
-          center: [39, 35],
-          zoom: 6,
-          population: "85 milyon",
-          capital: "Ankara"
-        },
-        {
-          name: "Almanya",
-          center: [51, 10],
-          zoom: 6,
-          population: "84 milyon",
-          capital: "Berlin"
-        },
-        {
-          name: "Fransa",
-          center: [46, 2],
-          zoom: 6,
-          population: "65 milyon",
-          capital: "Paris"
-        }
-      ]
-    },
-    {
-      name: "Asya",
-      center: [34, 100],
-      zoom: 3,
-      info: "Asya kıtası seçildi.",
-      countries: [
-        {
-          name: "Japonya",
-          center: [36, 138],
-          zoom: 6,
-          population: "125 milyon",
-          capital: "Tokyo"
-        }
-      ]
-    }
-  ];
+  fetch("data/mapdata.json")
+    .then(res => res.json())
+    .then(data => initMap(data.continents));
 
-  // Kıta markerları
-  continents.forEach(continent => {
-    const marker = L.circleMarker(continent.center, {
-      radius: 8,
-      color: "#000",
-      fillColor: "#000",
-      fillOpacity: 0.8
-    }).addTo(map);
+  function initMap(continents) {
+    continents.forEach(continent => {
+      const marker = L.circleMarker(continent.center, {
+        radius: 8,
+        color: "#000",
+        fillColor: "#000",
+        fillOpacity: 0.8
+      }).addTo(map);
 
-    marker.on("click", () => {
-      map.setView(continent.center, continent.zoom);
-      clearCountries();
-      showContinent(continent);
+      marker.on("click", () => {
+        map.setView(continent.center, continent.zoom);
+        clearCountries();
+        showContinent(continent);
+      });
     });
-  });
+  }
 
   function showContinent(continent) {
     infoPanel.innerHTML = `
@@ -177,12 +131,10 @@
       const div = document.createElement("div");
       div.className = "country-item";
       div.innerText = country.name;
-
       div.onclick = () => {
         map.setView(country.center, country.zoom);
         showCountry(country);
       };
-
       infoPanel.appendChild(div);
 
       const cMarker = L.circleMarker(country.center, {
@@ -211,7 +163,7 @@
   }
 
   function clearCountries() {
-    countryMarkers.forEach(marker => map.removeLayer(marker));
+    countryMarkers.forEach(m => map.removeLayer(m));
     countryMarkers = [];
   }
 </script>
