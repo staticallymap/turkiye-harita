@@ -1,132 +1,236 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>GeoStats | Veriyle Dünyayı Keşfet</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>StaticallyMap | Harita & Haber Platformu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:Segoe UI,system-ui;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-color:white;
-min-height:100vh;
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-header{
-padding:40px 60px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-.logo{
-font-size:26px;
-font-weight:700;
-letter-spacing:1px;
-}
+    body {
+      background: #f5f7fa;
+      color: #1f2937;
+    }
 
-.hero{
-max-width:1100px;
-margin:60px auto;
-padding:0 30px;
-text-align:center;
-}
+    /* HEADER */
+    header {
+      background: #ffffff;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-.hero h1{
-font-size:52px;
-line-height:1.1;
-margin-bottom:20px;
-}
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2563eb;
+    }
 
-.hero p{
-font-size:18px;
-color:#cbd5e1;
-margin-bottom:50px;
-}
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+    }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
+    nav a:hover {
+      color: #2563eb;
+    }
 
-.card{
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-border-radius:20px;
-padding:30px;
-transition:.3s;
-cursor:pointer;
-border:1px solid rgba(255,255,255,.1);
-}
+    /* HERO */
+    .hero {
+      padding: 100px 60px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
 
-.card:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.12);
-}
+    .hero-text {
+      max-width: 600px;
+    }
 
-.card h2{
-font-size:24px;
-margin-bottom:10px;
-}
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
 
-.card p{
-color:#cbd5e1;
-font-size:15px;
-line-height:1.5;
-}
+    .hero-text p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
 
-footer{
-text-align:center;
-padding:40px;
-color:#94a3b8;
-font-size:14px;
-}
-</style>
+    .hero-text button {
+      padding: 14px 30px;
+      background: white;
+      color: #1e40af;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero-text button:hover {
+      background: #e5e7eb;
+    }
+
+    .hero-visual {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 16px;
+      font-size: 80px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 60px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      max-width: 700px;
+      color: #4b5563;
+      margin-bottom: 50px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 40px 60px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer span {
+      color: #60a5fa;
+    }
+
+    @media(max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">📊 GeoStats</div>
-</header>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">StaticallyMap</div>
+    <nav>
+      <a href="#">Anasayfa</a>
+      <a href="#">Haritalar</a>
+      <a href="#">Haberler</a>
+      <a href="#">Hakkında</a>
+    </nav>
+  </header>
 
-<section class="hero">
-<h1>Veriyle<br>Dünyayı Keşfet</h1>
-<p>
-Ülkeler, şehirler ve nüfus verileri tek bir harita üzerinde.  
-Etkileşimli, görsel ve sade.
-</p>
-
-<div class="cards">
-  <div class="card" onclick="location.href='turkey.html'">
-    <h2>🇹🇷 Türkiye</h2>
-    <p>
-    İl bazlı nüfus, bölge, yüzölçümü ve etkileşimli harita.
-    </p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Haritalar, Veriler ve Güncel Haberler</h1>
+      <p>
+        StaticallyMap; coğrafi verileri, harita tabanlı analizleri ve güncel
+        haberleri sade, hızlı ve modern bir deneyimle sunar.
+      </p>
+      <button>Haritaları Keşfet</button>
+    </div>
+    <div class="hero-visual">🗺️</div>
   </div>
 
-  <div class="card">
-    <h2>🌍 Dünya</h2>
-    <p>
-    Yakında: ülkelerin nüfus ve demografik yapıları.
+  <!-- ABOUT -->
+  <section>
+    <h2 class="section-title">StaticallyMap Nedir?</h2>
+    <p class="section-desc">
+      StaticallyMap; statik haritalar, bölgesel analizler ve
+      harita destekli haberleri tek bir platformda toplayan
+      modern bir bilgi merkezidir.
     </p>
-  </div>
 
-  <div class="card">
-    <h2>🇪🇺 Avrupa</h2>
-    <p>
-    Yakında: ülke ülke etnik ve nüfus verileri.
-    </p>
-  </div>
-</div>
-</section>
+    <div class="cards">
+      <div class="card">
+        <h3>📍 Harita Tabanlı İçerik</h3>
+        <p>
+          Ülkeler, şehirler ve bölgeler üzerinden görselleştirilmiş
+          veriler ve analizler.
+        </p>
+      </div>
 
-<footer>
-© 2026 GeoStats • Veriye dayalı görselleştirme
-</footer>
+      <div class="card">
+        <h3>📰 Güncel Haberler</h3>
+        <p>
+          Coğrafya, çevre, afetler ve dünya gündemiyle ilgili
+          harita destekli haberler.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Hızlı & Sade</h3>
+        <p>
+          Statik yapı sayesinde hızlı yüklenen,
+          dikkat dağıtmayan modern bir deneyim.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 <span>StaticallyMap</span> · Harita & Haber Platformu
+  </footer>
 
 </body>
 </html>
